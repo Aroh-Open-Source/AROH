@@ -21,8 +21,9 @@ for (const file of manifestFiles) {
   console.log(`\n🔍 Verifying: ${file}...`);
 
   try {
-    const rawData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-    const manifest = validateProjectManifest(rawData);
+    const rawData = fs.readFileSync(filePath, "utf-8").replace(/^\uFEFF/, "");
+    const manifest = validateProjectManifest(JSON.parse(rawData));
+
 
     console.log(`   ✓ ID: ${manifest.identity.id}`);
     console.log(`   ✓ Name: ${manifest.identity.name}`);

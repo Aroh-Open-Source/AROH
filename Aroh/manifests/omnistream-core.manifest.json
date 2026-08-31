@@ -1,0 +1,70 @@
+{
+  "$schemaVersion": "v1.0.0",
+  "identity": {
+    "id": "omnistream-core",
+    "name": "OmniStream Core",
+    "description": "Dual-mode video intelligence streaming platform featuring Cinemorph AI and UTube.",
+    "upstreamUrl": "https://github.com/UdayPatnala/omnistream",
+    "repositoryType": "git",
+    "targetPath": "Products/OmniStream",
+
+    "branch": "main",
+    "upstreamVersion": "v1.0.0",
+    "commitHash": "c1d2e3f4a5b67890",
+    "ownership": "team-media-intelligence"
+  },
+  "governance": {
+    "syncPolicy": "continuous_governed",
+    "mergeStrategy": "downstream_wins",
+    "autoSyncEnabled": false,
+    "excludedPaths": [
+      "**/node_modules/**",
+      "**/dist/**"
+    ],
+    "generatedPaths": [
+      "dist/**"
+    ],
+    "protectedPaths": [
+      "src/services/storageService.ts"
+    ]
+  },
+  "compatibility": {
+    "ecosystemVersion": "v2.0.0",
+    "minimumAsdkVersion": "v2.0.0",
+    "dependencies": {
+      "zod": "^3.22.4"
+    },
+    "requiredPlatformServices": [
+      "auth",
+      "aros-wallet"
+    ]
+  },
+  "metadata": {
+    "lastSyncedAt": "2026-08-31T09:00:00Z",
+    "modifiedFiles": [],
+    "generatedFiles": [],
+    "migrationHistory": [
+      {
+        "version": "v1.0.0",
+        "appliedAt": "2026-08-31T09:00:00Z",
+        "description": "Integrated OmniStream product into AROH Open Source ecosystem"
+      }
+    ],
+    "architecturalNotes": [
+      "OmniStream features dual-mode Cinemorph AI 3D WebGL theater and UTube search & playback with offline resilience."
+    ],
+    "aiAnnotations": {
+      "domain": "Video Intelligence & Media Streaming",
+      "webglAcceleration": "true",
+      "mlFramingGeometry": "true"
+    },
+    "auditTrail": [
+      {
+        "timestamp": "2026-08-31T09:00:00Z",
+        "action": "MANIFEST_REGISTER",
+        "actor": "system:architect",
+        "details": "Registered managed project manifest for omnistream-core"
+      }
+    ]
+  }
+}

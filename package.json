@@ -1,22 +1,35 @@
 {
-  "name": "aroh-monorepo",
-  "version": "1.0.0",
+  "name": "aroh-open-source",
+  "version": "2.0.0",
   "private": true,
+  "description": "AROH Open Source: Unified Platform & Decentralized Application Ecosystem",
   "workspaces": [
-    "apps/web",
-    "packages/*"
+    "Aroh",
+    "Aroh/apps/*",
+    "Aroh/packages/*",
+    "Products/OmniStream",
+    "Products/Spedex/dashboard_app"
   ],
   "scripts": {
-    "dev": "npm run dev --workspaces --if-present",
-    "build": "npm run build --workspaces --if-present",
-    "start": "npm run start --workspaces --if-present",
-    "test": "npm run test --workspaces --if-present"
+    "build:aroh": "npm run build --prefix Aroh",
+    "build:omnistream": "npm run build --prefix Products/OmniStream",
+    "build:spedex": "npm run build --prefix Products/Spedex/dashboard_app",
+    "build:all": "npm run build:aroh && npm run build:omnistream && npm run build:spedex",
+    "test:aroh": "npm run test --prefix Aroh",
+    "test:omnistream": "npm run test --prefix Products/OmniStream",
+    "test:spedex": "npm run test --prefix Products/Spedex/mobile",
+    "test:all": "npm run test:aroh && npm run test:omnistream && npm run test:spedex"
   },
-  "devDependencies": {
-    "puppeteer": "^25.3.0",
-    "typescript": "^5.0.0"
-  },
-  "dependencies": {
-    "ajv": "^8.20.0"
-  }
+  "keywords": [
+    "aroh",
+    "ecosystem",
+    "monorepo",
+    "omnistream",
+    "spedex",
+    "platform",
+    "asdk",
+    "ads"
+  ],
+  "author": "Uday Patnala",
+  "license": "MIT"
 }

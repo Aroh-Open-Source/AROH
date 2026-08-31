@@ -23,8 +23,21 @@ export interface ProductDetails {
 
 export const registeredProducts: ProductDetails[] = [
   {
+    id: "omnistream",
+    name: "OmniStream",
+    badge: "AI Tools",
+    description: "Dual-mode video intelligence streaming platform featuring Cinemorph AI and UTube.",
+    longDescription: "OmniStream is a high-performance dual-mode video intelligence platform. Features include Cinemorph AI WebGL 3D theater with ML framing geometry, aperture-matched printing ticket intro animations, and UTube search and playback.",
+    requiredTier: "basic",
+    price: 150,
+    version: "v1.0.0",
+    author: "Uday Patnala",
+    url: "https://github.com/UdayPatnala/omnistream"
+  },
+  {
     id: "nebula",
     name: "Nebula",
+
     badge: "Ecosystem Service",
     description: "AI-powered personal media intelligence platform for story-driven galleries.",
     longDescription: "Nebula is a personal media intelligence platform for transforming collections of photos and videos into interactive, story-driven galleries. It includes a 5-stage analysis pipeline and ambient gallery builders.",

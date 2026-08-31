@@ -1,0 +1,29 @@
+{
+  "name": "aroh-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/web",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=@aroh/web",
+    "build": "npm run build --workspace=@aroh/web",
+    "start": "npm run start --workspace=@aroh/web",
+
+    "test": "npm run test:manifests && npm run test:ai && npm run test:sdk && npm run test:session",
+    "test:manifests": "tsx scripts/verify-sync-manifests.js",
+    "test:ai": "tsx scripts/test-ai-abstraction.js",
+    "test:sdk": "tsx scripts/test-sdk.js",
+    "test:session": "tsx scripts/test-session-sync.js",
+    "test:e2e": "node scripts/e2e-audit.js"
+  },
+  "devDependencies": {
+    "puppeteer": "^25.3.0",
+    "tsx": "^4.23.13",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0"
+  }
+}
