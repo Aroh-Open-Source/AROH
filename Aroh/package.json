@@ -11,11 +11,12 @@
     "build": "npm run build --workspace=@aroh/web",
     "start": "npm run start --workspace=@aroh/web",
 
-    "test": "npm run test:manifests && npm run test:ai && npm run test:sdk && npm run test:session",
+    "test": "npm run test:manifests && npm run test:ai && npm run test:sdk && npm run test:session && npm run test:packages",
     "test:manifests": "tsx scripts/verify-sync-manifests.js",
     "test:ai": "tsx scripts/test-ai-abstraction.js",
     "test:sdk": "tsx scripts/test-sdk.js",
     "test:session": "tsx scripts/test-session-sync.js",
+    "test:packages": "npm test --prefix packages/ads && npm test --prefix packages/asdk",
     "test:e2e": "node scripts/e2e-audit.js"
   },
   "devDependencies": {
