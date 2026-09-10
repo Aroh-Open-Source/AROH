@@ -5,3 +5,4 @@ export * from "./store/index";
 export * from "./sync/index";
 export * from "./ai/provider";
 export * from "./registry/products";
+export * from "./adapters/index";

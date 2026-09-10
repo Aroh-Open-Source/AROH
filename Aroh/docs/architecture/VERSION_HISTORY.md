@@ -8,7 +8,8 @@
 
 | Version | Date | Type | Quick Summary | Git Tag | Commit |
 |---|---|:---:|---|:---:|:---:|
-| **v2.0.3** | 2026-09-10 | `PATCH` | **Working Tree Harmonization & Submodule Pointer Alignment**: Aligned parent git index pointer for `Products/OmniStream` to verified HEAD commit `8eb4ef0`, establishing a 100% clean baseline without mutating any files inside `Products/`. | `v2.0.3` | `Pending Commit` |
+| **v2.0.4** | 2026-09-10 | `MINOR` | **Spoke Adapter Interface Contract Specification**: Defined canonical adapter contract in `@aroh/asdk/adapters`, 7-level provenance verification taxonomy, fail-closed `Products/` boundary protection, and expanded test suite to 239 assertions. | `v2.0.4` | `Pending Commit` |
+| **v2.0.3** | 2026-09-10 | `PATCH` | **Working Tree Harmonization & Submodule Pointer Alignment**: Aligned parent git index pointer for `Products/OmniStream` to verified HEAD commit `8eb4ef0`, establishing a 100% clean baseline without mutating any files inside `Products/`. | `v2.0.3` | [`8ce4df0`](file:///d:/PROJECT/AROH%20Open%20Source) |
 | **v2.0.2** | 2026-09-10 | `PATCH` | **Canonical Product Showcase & Zero-Fabrication Registry**: Implemented `CANONICAL_PRODUCT_REGISTRY` in ASDK, strict Zod schema validation, authoritative URL & capability verification across all 8 products, responsive Explore and Product Detail workspaces, and expanded automated verification to 227 passing assertions across 8 test suites. | `v2.0.2` | [`2f43b62`](file:///d:/PROJECT/AROH%20Open%20Source) |
 | **v2.0.1** | 2026-09-10 | `MINOR` | **Safe Product-Change Synchronization CLI & Master Governance**: Implemented three-way semantic reconciliation engine ($B \oplus P \oplus A$), deterministic CLI exit codes (0–7), dry-run zero-mutation guarantees, absolute `Products/` boundary isolation, in-memory Firebase Auth fallback, and codified `D1`, `D2`, `D3` machine-operating specifications. | `v2.0.1` | [`5a8d7ee`](file:///d:/PROJECT/AROH%20Open%20Source) |
 | **v2.0.0** | 2026-08-31 | `MAJOR` | **Master Monorepo Restructuring & Ecosystem Realignment**: Decoupled monolithic codebase into `Aroh/` (central platform hub) and `Products/` (independent product codebases). Integrated OmniStream (v1.8.5) and SpeDex (v2.1.0). Introduced semantic project manifests (`manifests/*.manifest.json`, v1.0.0 schema) and comprehensive QA test runners. | `v2.0.0` | [`0d64b13`](file:///d:/PROJECT/AROH%20Open%20Source) |
@@ -18,6 +19,24 @@
 ---
 
 ## 2. Version Entries
+
+### v2.0.4
+- **Date**: 2026-09-10
+- **Type**: `MINOR` (Spoke Adapter Interface Contract Specification)
+- **Previous Version**: `v2.0.3`
+
+#### Quick Summary
+Defined and implemented the canonical Spoke Adapter Interface Contract in `@aroh/asdk/adapters`, formalizing the decoupled boundary between AROH and autonomous spoke applications without copying or mutating spoke internals.
+- **Canonical Adapter Contract (`Aroh/packages/asdk/src/adapters/contract.ts`)**:
+  - Implemented `SpokeAdapterContractSchema`, `OwnershipBoundarySchema`, `InspectionBoundarySchema`, and `SpokePermissionsBoundarySchema`.
+  - Enforced seven-level provenance verification taxonomy (`VERIFIED`, `IMPLEMENTED-REPORTED`, `DOCUMENTED`, `INFERRED`, `PROPOSED`, `UNKNOWN`, `SUPERSEDED`).
+  - Added fail-closed validation guaranteeing `targetConsumerPath` can never resolve inside `Products/`.
+  - Implemented health telemetry and degraded fallback state helper (`createDegradedSpokeState`).
+- **Architectural Specification (`Aroh/docs/architecture/ADAPTER_CONTRACT_SPECIFICATION.md`)**:
+  - Authored canonical specification defining ownership, inspection, launch URLs, permissions, and health probes.
+- **Automated Verification Harness (`Aroh/packages/asdk/tests/adapter-contract.test.ts`)**:
+  - Added 12 new Vitest assertions validating contract schemas, boundary enforcement, and degraded states.
+  - Monorepo test pass expanded to **239 passing assertions across 8 test suites**.
 
 ### v2.0.3
 - **Date**: 2026-09-10
