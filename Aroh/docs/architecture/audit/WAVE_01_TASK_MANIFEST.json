@@ -1,0 +1,220 @@
+﻿{
+  "wave": "WAVE_01",
+  "manifest_version": "1.0.0",
+  "generated_at": "2026-09-10T11:35:00+05:30",
+  "source_of_truth": [
+    "Aroh/docs/architecture/AROH_LIVING_ARCHITECTURE_INTELLIGENCE.md",
+    "Aroh/docs/architecture/VERSION_HISTORY.md",
+    "Aroh/docs/architecture/audit/STATE_RECONCILIATION_REPORT.md",
+    "Aroh/docs/architecture/audit/STAGE_20_HANDOFF.md",
+    "Aroh/docs/architecture/audit/CANONICAL_REMOTE_MIGRATION_HANDOFF.md",
+    "Aroh/docs/architecture/ADAPTER_CONTRACT_SPECIFICATION.md"
+  ],
+  "starting_commit": "2f43b6251536ae66f0060d634b54377ac8385ca3",
+  "canonical_remote": "origin/main",
+  "tasks": [
+    {
+      "task_id": "WAVE-01-TASK-01",
+      "sequence": 1,
+      "title": "Working Tree Harmonization & Submodule Pointer Alignment",
+      "objective": "Align parent git index pointer for Products/OmniStream to verified HEAD commit 8eb4ef0, achieving 100% clean baseline without mutating any files inside Products/.",
+      "authoritative_source": "Aroh/docs/architecture/audit/STATE_RECONCILIATION_REPORT.md",
+      "source_section": "Section 4.3 (Clean Working Tree Checkpoint) & Section 10 Item 4 in LIVING_ARCHITECTURE",
+      "prerequisites": [
+        "Canonical remote parity established at 2f43b62"
+      ],
+      "dependencies": [],
+      "allowed_scope": [
+        "Root git index entry for Products/OmniStream",
+        "Aroh/docs/architecture/VERSION_HISTORY.md",
+        "Aroh/docs/architecture/audit/WAVE_01_TASK_01_HANDOFF.md",
+        "Aroh/docs/architecture/audit/WAVE_01_TASK_01_HANDOFF.json",
+        "Aroh/docs/architecture/audit/AUDIT_HANDOFF_INDEX.md",
+        "Aroh/docs/architecture/audit/AUDIT_HANDOFF_INDEX.json"
+      ],
+      "prohibited_scope": [
+        "Products/ files (zero modifications)",
+        "Phase 3.0 features",
+        "Modifying manifests to non-existent paths"
+      ],
+      "expected_artifacts": [
+        "Aroh/docs/architecture/audit/WAVE_01_TASK_01_HANDOFF.md",
+        "Aroh/docs/architecture/audit/WAVE_01_TASK_01_HANDOFF.json"
+      ],
+      "expected_tests": [
+        "npm test (227 assertions)",
+        "npm run build (14 routes)"
+      ],
+      "expected_documentation": [
+        "VERSION_HISTORY.md v2.0.3",
+        "AUDIT_HANDOFF_INDEX.md"
+      ],
+      "expected_commit": "fix(workspace): harmonize working tree and align OmniStream submodule pointer [Wave 1 Task 1]",
+      "execution_status": "COMPLETED",
+      "start_commit": "2f43b6251536ae66f0060d634b54377ac8385ca3",
+      "completion_commit": "8ce4df074bbde6ee65b56a5e1d7842d64bbd9064",
+      "validation_status": "PASS",
+      "products_boundary_status": "VERIFIED",
+      "remote_parity_status": "VERIFIED",
+      "handoff_path": "Aroh/docs/architecture/audit/WAVE_01_TASK_01_HANDOFF.md",
+      "blockers": [],
+      "final_classification": "VERIFIED"
+    },
+    {
+      "task_id": "WAVE-01-TASK-02",
+      "sequence": 2,
+      "title": "Spoke Adapter Interface Contract Specification in @aroh/asdk",
+      "objective": "Define the canonical adapter contract required for safely integrating independently-owned products/spokes with AROH without copying, restructuring, mutating, or absorbing their internal implementation.",
+      "authoritative_source": "Aroh/docs/architecture/audit/STATE_RECONCILIATION_REPORT.md",
+      "source_section": "Section 4.2 (Manifest Target Path Strategy) & D1/D2/D3 specifications",
+      "prerequisites": [
+        "WAVE-01-TASK-01 completion and remote parity"
+      ],
+      "dependencies": [
+        "WAVE-01-TASK-01"
+      ],
+      "allowed_scope": [
+        "Aroh/packages/asdk/src/adapters/contract.ts",
+        "Aroh/packages/asdk/src/adapters/index.ts",
+        "Aroh/packages/asdk/src/index.ts",
+        "Aroh/packages/asdk/tests/adapter-contract.test.ts",
+        "Aroh/docs/architecture/ADAPTER_CONTRACT_SPECIFICATION.md",
+        "Aroh/docs/architecture/audit/WAVE_01_TASK_02_HANDOFF.md",
+        "Aroh/docs/architecture/audit/WAVE_01_TASK_02_HANDOFF.json"
+      ],
+      "prohibited_scope": [
+        "Products/ files (zero writes)",
+        "Fabricating adapter implementations for individual products",
+        "packages/asdk/src/adapters/spedex (premature)"
+      ],
+      "expected_artifacts": [
+        "Aroh/packages/asdk/src/adapters/contract.ts",
+        "Aroh/docs/architecture/ADAPTER_CONTRACT_SPECIFICATION.md",
+        "Aroh/docs/architecture/audit/WAVE_01_TASK_02_HANDOFF.md",
+        "Aroh/docs/architecture/audit/WAVE_01_TASK_02_HANDOFF.json"
+      ],
+      "expected_tests": [
+        "npm test --prefix packages/asdk (36 tests)",
+        "npm test (239 assertions)",
+        "npm run build (14 routes)"
+      ],
+      "expected_documentation": [
+        "VERSION_HISTORY.md v2.0.4",
+        "ADAPTER_CONTRACT_SPECIFICATION.md"
+      ],
+      "expected_commit": "feat(asdk): define spoke adapter interface contract [Wave 1 Task 2]",
+      "execution_status": "COMPLETED",
+      "start_commit": "8ce4df074bbde6ee65b56a5e1d7842d64bbd9064",
+      "completion_commit": "2f740f7e85a870f3d0166c2db89d24f727897236",
+      "validation_status": "PASS",
+      "products_boundary_status": "VERIFIED",
+      "remote_parity_status": "VERIFIED",
+      "handoff_path": "Aroh/docs/architecture/audit/WAVE_01_TASK_02_HANDOFF.md",
+      "blockers": [],
+      "final_classification": "VERIFIED"
+    },
+    {
+      "task_id": "WAVE-01-TASK-03",
+      "sequence": 3,
+      "title": "Manifest Governance Alignment & Decoupled Target Path Policy Audit",
+      "objective": "Audit all 5 managed manifests against the newly established Spoke Adapter Interface Contract, formally codifying the decoupled targetPath policy (preserving existing paths without modifying product internals) and validating manifest schemas and sync preview behavior.",
+      "authoritative_source": "Aroh/docs/architecture/audit/STATE_RECONCILIATION_REPORT.md",
+      "source_section": "Section 4.2 & manifests/*.manifest.json",
+      "prerequisites": [
+        "WAVE-01-TASK-02 completion and remote parity"
+      ],
+      "dependencies": [
+        "WAVE-01-TASK-02"
+      ],
+      "allowed_scope": [
+        "Aroh/manifests/*.manifest.json (if governance metadata requires synchronization)",
+        "Aroh/scripts/verify-sync-manifests.js",
+        "Aroh/docs/architecture/audit/WAVE_01_TASK_03_HANDOFF.md",
+        "Aroh/docs/architecture/audit/WAVE_01_TASK_03_HANDOFF.json",
+        "Aroh/docs/architecture/audit/AUDIT_HANDOFF_INDEX.md",
+        "Aroh/docs/architecture/audit/AUDIT_HANDOFF_INDEX.json"
+      ],
+      "prohibited_scope": [
+        "Products/ files (zero modifications)",
+        "Repointing targetPath to non-existent directories"
+      ],
+      "expected_artifacts": [
+        "Aroh/docs/architecture/audit/WAVE_01_TASK_03_HANDOFF.md",
+        "Aroh/docs/architecture/audit/WAVE_01_TASK_03_HANDOFF.json"
+      ],
+      "expected_tests": [
+        "npm run test:manifests (16 assertions)",
+        "npm test (239 assertions)",
+        "npm run build (14 routes)"
+      ],
+      "expected_documentation": [
+        "AUDIT_HANDOFF_INDEX.md",
+        "WAVE_01_TASK_03_HANDOFF.md"
+      ],
+      "expected_commit": "chore(manifests): audit manifest governance alignment and validate decoupled target policy [Wave 1 Task 3]",
+      "execution_status": "NOT_STARTED",
+      "start_commit": null,
+      "completion_commit": null,
+      "validation_status": "NOT_RUN",
+      "products_boundary_status": "NOT_VERIFIED",
+      "remote_parity_status": "NOT_VERIFIED",
+      "handoff_path": null,
+      "blockers": [],
+      "final_classification": null
+    },
+    {
+      "task_id": "WAVE-01-TASK-04",
+      "sequence": 4,
+      "title": "Monorepo Submodule Alignment & Working Tree Baseline Finalization",
+      "objective": "Align the parent monorepo git index reference for Products/OmniStream to its latest upstream-pushed commit e3e7643, ensuring 100% clean working tree and full baseline stabilization across the monorepo.",
+      "authoritative_source": "Aroh/docs/architecture/AROH_LIVING_ARCHITECTURE_INTELLIGENCE.md",
+      "source_section": "Section 10 Item 4 (Submodule Pinning) & Stage 20 Working Tree Harmonization",
+      "prerequisites": [
+        "WAVE-01-TASK-03 completion and remote parity"
+      ],
+      "dependencies": [
+        "WAVE-01-TASK-03"
+      ],
+      "allowed_scope": [
+        "Root git index entry for Products/OmniStream",
+        "Aroh/docs/architecture/audit/WAVE_01_TASK_04_HANDOFF.md",
+        "Aroh/docs/architecture/audit/WAVE_01_TASK_04_HANDOFF.json",
+        "Aroh/docs/architecture/audit/AUDIT_HANDOFF_INDEX.md",
+        "Aroh/docs/architecture/audit/AUDIT_HANDOFF_INDEX.json"
+      ],
+      "prohibited_scope": [
+        "Products/ files (zero modifications)",
+        "Unverified submodule commits"
+      ],
+      "expected_artifacts": [
+        "Aroh/docs/architecture/audit/WAVE_01_TASK_04_HANDOFF.md",
+        "Aroh/docs/architecture/audit/WAVE_01_TASK_04_HANDOFF.json"
+      ],
+      "expected_tests": [
+        "npm test (239 assertions)",
+        "npm run build (14 routes)"
+      ],
+      "expected_documentation": [
+        "VERSION_HISTORY.md",
+        "WAVE_01_TASK_04_HANDOFF.md"
+      ],
+      "expected_commit": "fix(workspace): align OmniStream submodule pointer to upstream HEAD e3e7643 [Wave 1 Task 4]",
+      "execution_status": "NOT_STARTED",
+      "start_commit": null,
+      "completion_commit": null,
+      "validation_status": "NOT_RUN",
+      "products_boundary_status": "NOT_VERIFIED",
+      "remote_parity_status": "NOT_VERIFIED",
+      "handoff_path": null,
+      "blockers": [],
+      "final_classification": null
+    }
+  ],
+  "completion": {
+    "total_tasks": 4,
+    "completed": 2,
+    "blocked": 0,
+    "requires_review": 0,
+    "not_started": 2
+  }
+}
