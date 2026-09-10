@@ -338,6 +338,19 @@
         "WAVE1-TASK03",
         "MAN-001"
       ]
+    },
+    {
+      "stage_id": "WAVE-01-TASK-04",
+      "num": "W1T4",
+      "name": "Monorepo Submodule Alignment & Working Tree Baseline Finalization",
+      "status": "COMPLETED",
+      "handoff_path": "WAVE_01_TASK_04_HANDOFF.md",
+      "artifact": "WAVE_01_TASK_04_RECORD",
+      "handoff_status": "READY_FOR_NEXT_STAGE",
+      "stable_ids": [
+        "WAVE1-TASK04",
+        "PIN-002"
+      ]
     }
   ]
 }

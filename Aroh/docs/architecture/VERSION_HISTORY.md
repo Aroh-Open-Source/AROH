@@ -8,7 +8,8 @@
 
 | Version | Date | Type | Quick Summary | Git Tag | Commit |
 |---|---|:---:|---|:---:|:---:|
-| **v2.0.4** | 2026-09-10 | `MINOR` | **Spoke Adapter Interface Contract Specification**: Defined canonical adapter contract in `@aroh/asdk/adapters`, 7-level provenance verification taxonomy, fail-closed `Products/` boundary protection, and expanded test suite to 239 assertions. | `v2.0.4` | `Pending Commit` |
+| **v2.0.5** | 2026-09-10 | `PATCH` | **Wave 1 Execution & Baseline Harmonization**: Audited all 5 project manifests for decoupled target path policy compliance (Task 3), aligned OmniStream submodule pointer to upstream HEAD `e3e7643` (Task 4), and finalized canonical Wave 1 execution plan. | `v2.0.5` | `Pending Commit` |
+| **v2.0.4** | 2026-09-10 | `MINOR` | **Spoke Adapter Interface Contract Specification**: Defined canonical adapter contract in `@aroh/asdk/adapters`, 7-level provenance verification taxonomy, fail-closed `Products/` boundary protection, and expanded test suite to 239 assertions. | `v2.0.4` | [`2f740f7`](file:///d:/PROJECT/AROH%20Open%20Source) |
 | **v2.0.3** | 2026-09-10 | `PATCH` | **Working Tree Harmonization & Submodule Pointer Alignment**: Aligned parent git index pointer for `Products/OmniStream` to verified HEAD commit `8eb4ef0`, establishing a 100% clean baseline without mutating any files inside `Products/`. | `v2.0.3` | [`8ce4df0`](file:///d:/PROJECT/AROH%20Open%20Source) |
 | **v2.0.2** | 2026-09-10 | `PATCH` | **Canonical Product Showcase & Zero-Fabrication Registry**: Implemented `CANONICAL_PRODUCT_REGISTRY` in ASDK, strict Zod schema validation, authoritative URL & capability verification across all 8 products, responsive Explore and Product Detail workspaces, and expanded automated verification to 227 passing assertions across 8 test suites. | `v2.0.2` | [`2f43b62`](file:///d:/PROJECT/AROH%20Open%20Source) |
 | **v2.0.1** | 2026-09-10 | `MINOR` | **Safe Product-Change Synchronization CLI & Master Governance**: Implemented three-way semantic reconciliation engine ($B \oplus P \oplus A$), deterministic CLI exit codes (0–7), dry-run zero-mutation guarantees, absolute `Products/` boundary isolation, in-memory Firebase Auth fallback, and codified `D1`, `D2`, `D3` machine-operating specifications. | `v2.0.1` | [`5a8d7ee`](file:///d:/PROJECT/AROH%20Open%20Source) |
@@ -19,6 +20,23 @@
 ---
 
 ## 2. Version Entries
+
+### v2.0.5
+- **Date**: 2026-09-10
+- **Type**: `PATCH` (Wave 1 Execution & Working Tree Baseline Harmonization)
+- **Previous Version**: `v2.0.4`
+
+#### Quick Summary
+Completed Wave 1 execution plan tasks 3 and 4: audited all 5 project manifests for strict decoupled target path governance and harmonized monorepo root gitlink for `Products/OmniStream` to upstream HEAD commit `e3e7643`.
+- **Manifest Decoupled Target Policy Audit (WAVE-01-TASK-03)**:
+  - Audited `manifests/*.manifest.json` across all 5 projects.
+  - Formally codified policy preserving existing target paths until Phase 3.0 concrete adapter capsules are built.
+  - Enhanced `scripts/verify-sync-manifests.js` with automated target path policy assertions.
+- **Submodule Pointer Harmonization (WAVE-01-TASK-04)**:
+  - Aligned parent index pointer for `Products/OmniStream` to upstream HEAD commit `e3e7643`.
+  - Maintained absolute `Products/` boundary inviolability: 0 files modified inside `Products/`.
+- **Wave 1 Finalization**:
+  - All 4 approved Wave 1 tasks completed, validated, and audited.
 
 ### v2.0.4
 - **Date**: 2026-09-10

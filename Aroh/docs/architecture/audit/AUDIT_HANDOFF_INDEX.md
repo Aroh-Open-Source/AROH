@@ -55,5 +55,6 @@ All 22 stages of the comprehensive AROH audit have been executed in strict seque
 | **WAVE-01-TASK-01** | [Working Tree Harmonization & Submodule Pointer Alignment](./WAVE_01_TASK_01_HANDOFF.md) | `COMPLETED` | `WAVE_01_TASK_01_HANDOFF.md` | Aligned parent index pointer for `Products/OmniStream` to commit `8eb4ef0`. Clean baseline established. |
 | **WAVE-01-TASK-02** | [Spoke Adapter Interface Contract Specification](./WAVE_01_TASK_02_HANDOFF.md) | `COMPLETED` | `WAVE_01_TASK_02_HANDOFF.md` | Defined canonical Spoke Adapter Interface Contract in `@aroh/asdk/adapters`, 7-level provenance, boundary protection. |
 | **WAVE-01-TASK-03** | [Manifest Governance Alignment & Decoupled Target Policy](./WAVE_01_TASK_03_HANDOFF.md) | `COMPLETED` | `WAVE_01_TASK_03_HANDOFF.md` | Audited all 5 manifests, enforced decoupled targetPath policy and schema compliance. |
+| **WAVE-01-TASK-04** | [Monorepo Submodule Alignment & Working Tree Baseline](./WAVE_01_TASK_04_HANDOFF.md) | `COMPLETED` | `WAVE_01_TASK_04_HANDOFF.md` | Aligned OmniStream submodule pointer to upstream HEAD `e3e7643`. Clean baseline. |
 
 The platform is fully qualified for **Phase 3.0: Developer Portal & External Service Federation** once Wave 1 execution completes.
