@@ -163,3 +163,135 @@ export function calculateDrift(
     driftItems
   };
 }
+
+// Artifact Ownership
+export const ArtifactOwnershipSchema = z.enum([
+  "product_owned",
+  "aroh_owned",
+  "shared_contract",
+  "protected_downstream",
+  "generated_derivative",
+  "ambiguous"
+]);
+export type ArtifactOwnership = z.infer<typeof ArtifactOwnershipSchema>;
+
+// Synchronization Direction
+export const SyncDirectionSchema = z.enum([
+  "product_to_aroh",
+  "aroh_to_product",
+  "bi_directional",
+  "immutable_boundary"
+]);
+export type SyncDirection = z.infer<typeof SyncDirectionSchema>;
+
+// Semantic Diff Category
+export const SemanticDiffCategorySchema = z.enum([
+  "unchanged",
+  "product_only_change",
+  "aroh_only_change",
+  "synchronized_equivalent",
+  "compatible_divergent",
+  "conflicting_change",
+  "deletion_requiring_review",
+  "addition_requiring_mapping",
+  "renamed_artifact",
+  "moved_artifact",
+  "generated_artifact",
+  "unknown"
+]);
+export type SemanticDiffCategory = z.infer<typeof SemanticDiffCategorySchema>;
+
+// Conflict Category
+export const ConflictCategorySchema = z.enum([
+  "contract_mismatch",
+  "concurrent_modification",
+  "dependency_incompatibility",
+  "protected_violation",
+  "schema_incompatibility",
+  "ownership_ambiguity",
+  "unauthorized_product_mutation"
+]);
+export type ConflictCategory = z.infer<typeof ConflictCategorySchema>;
+
+// Reconciliation Action
+export const ReconciliationActionSchema = z.enum([
+  "noop_unchanged",
+  "accept_product_change",
+  "preserve_aroh_change",
+  "preserve_protected",
+  "skip_excluded",
+  "block_conflict",
+  "update_manifest_metadata",
+  "reconcile_contract",
+  "flag_for_review"
+]);
+export type ReconciliationAction = z.infer<typeof ReconciliationActionSchema>;
+
+// Detailed Item
+export const ArtifactReconciliationItemSchema = z.object({
+  artifactPath: z.string(),
+  relativeSourcePath: z.string(),
+  canonicalArohPath: z.string().optional(),
+  ownership: ArtifactOwnershipSchema,
+  diffCategory: SemanticDiffCategorySchema,
+  baselineHash: z.string().optional(),
+  productHash: z.string().optional(),
+  arohHash: z.string().optional(),
+  action: ReconciliationActionSchema,
+  reason: z.string(),
+  conflict: z.object({
+    category: ConflictCategorySchema,
+    description: z.string(),
+    impact: z.enum(["low", "medium", "high", "critical"]),
+    requiredResolution: z.string()
+  }).optional()
+});
+export type ArtifactReconciliationItem = z.infer<typeof ArtifactReconciliationItemSchema>;
+
+// Full Sync Plan
+export const SyncPlanSchema = z.object({
+  planId: z.string(),
+  projectId: z.string(),
+  timestamp: z.string(),
+  dryRun: z.boolean(),
+  isClean: z.boolean(),
+  hasConflicts: z.boolean(),
+  sourceCommit: z.string().optional(),
+  targetPath: z.string(),
+  items: z.array(ArtifactReconciliationItemSchema),
+  summary: z.object({
+    totalDetected: z.number(),
+    unchanged: z.number(),
+    productOnly: z.number(),
+    arohOnly: z.number(),
+    conflicts: z.number(),
+    protectedPreserved: z.number(),
+    excludedIgnored: z.number(),
+    actionsPlanned: z.number()
+  }),
+  protectedBoundaryEnforced: z.boolean().default(true),
+  validationRequirements: z.array(z.string()),
+  auditMetadata: z.object({
+    actor: z.string(),
+    generatedAt: z.string(),
+    manifestVersion: z.string()
+  })
+});
+export type SyncPlan = z.infer<typeof SyncPlanSchema>;
+
+// Execution Result
+export const SyncExecutionResultSchema = z.object({
+  planId: z.string(),
+  projectId: z.string(),
+  timestamp: z.string(),
+  dryRun: z.boolean(),
+  success: z.boolean(),
+  appliedActionsCount: z.number(),
+  skippedProtectedCount: z.number(),
+  conflictsBlockedCount: z.number(),
+  manifestUpdated: z.boolean(),
+  auditEntry: AuditEntrySchema,
+  errors: z.array(z.string()).default([])
+});
+export type SyncExecutionResult = z.infer<typeof SyncExecutionResultSchema>;
+

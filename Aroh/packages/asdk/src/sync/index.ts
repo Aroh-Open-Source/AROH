@@ -1,10 +1,14 @@
 export * from "./schema";
+export * from "./reconciler";
 import {
   ManagedProjectManifest,
   DriftReport,
   calculateDrift,
-  AuditEntry
+  AuditEntry,
+  SyncPlan,
+  SyncExecutionResult
 } from "./schema";
+import { SemanticReconciler, ReconcileOptions } from "./reconciler";
 
 export interface SyncPreview {
   projectId: string;
@@ -115,4 +119,26 @@ export class SemanticSyncEngine {
       auditEntry
     };
   }
+
+  /**
+   * Generates a deterministic three-way synchronization plan.
+   */
+  public static planReconciliation(
+    manifest: ManagedProjectManifest,
+    options: ReconcileOptions
+  ): SyncPlan {
+    return SemanticReconciler.planReconciliation(manifest, options);
+  }
+
+  /**
+   * Safely executes a reconciliation plan respecting dry-run and failure invariants.
+   */
+  public static executeReconciliation(
+    manifest: ManagedProjectManifest,
+    plan: SyncPlan,
+    options: { dryRun?: boolean; actor?: string; allowConflictOverride?: boolean } = {}
+  ): SyncExecutionResult {
+    return SemanticReconciler.executeReconciliation(manifest, plan, options);
+  }
 }
+

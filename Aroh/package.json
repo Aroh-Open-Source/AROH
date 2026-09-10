@@ -11,13 +11,23 @@
     "build": "npm run build --workspace=@aroh/web",
     "start": "npm run start --workspace=@aroh/web",
 
-    "test": "npm run test:manifests && npm run test:ai && npm run test:sdk && npm run test:session && npm run test:packages",
+    "test": "npm run test:manifests && npm run test:ai && npm run test:sdk && npm run test:session && npm run test:packages && npm run test:sync",
     "test:manifests": "tsx scripts/verify-sync-manifests.js",
     "test:ai": "tsx scripts/test-ai-abstraction.js",
     "test:sdk": "tsx scripts/test-sdk.js",
     "test:session": "tsx scripts/test-session-sync.js",
     "test:packages": "npm test --prefix packages/ads && npm test --prefix packages/asdk",
-    "test:e2e": "node scripts/e2e-audit.js"
+    "test:sync": "tsx scripts/test-sync-cli.js",
+    "test:e2e": "node scripts/e2e-audit.js",
+    "sync": "tsx scripts/aroh-sync.js",
+    "sync:status": "tsx scripts/aroh-sync.js status",
+    "sync:plan": "tsx scripts/aroh-sync.js plan",
+    "sync:dry-run": "tsx scripts/aroh-sync.js dry-run",
+    "sync:validate": "tsx scripts/aroh-sync.js validate",
+    "sync:conflicts": "tsx scripts/aroh-sync.js conflicts"
+  },
+  "bin": {
+    "aroh": "scripts/aroh-sync.js"
   },
   "devDependencies": {
     "puppeteer": "^25.3.0",
