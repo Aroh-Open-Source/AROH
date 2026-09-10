@@ -1,4 +1,4 @@
-﻿# AROH Platform: Canonical Wave 1 Task Manifest
+# AROH Platform: Canonical Wave 1 Task Manifest
 
 > **Manifest Version**: `1.0.0`
 > **Wave Identifier**: `WAVE_01`
@@ -21,7 +21,7 @@ This manifest represents the authoritative, machine-verifiable task registry for
 |---|---|---|:---:|:---:|:---:|:---:|:---:|
 | 1 | `WAVE-01-TASK-01` | Working Tree Harmonization & Submodule Pointer Alignment | `COMPLETED` | `8ce4df0` | `PASS` (227/227) | `VERIFIED` | `VERIFIED` |
 | 2 | `WAVE-01-TASK-02` | Spoke Adapter Interface Contract Specification in `@aroh/asdk` | `COMPLETED` | `2f740f7` | `PASS` (239/239) | `VERIFIED` | `VERIFIED` |
-| 3 | `WAVE-01-TASK-03` | Manifest Governance Alignment & Decoupled Target Path Policy Audit | `NOT_STARTED` | `PENDING` | `NOT_RUN` | `NOT_VERIFIED` | `NOT_VERIFIED` |
+| 3 | `WAVE-01-TASK-03` | Manifest Governance Alignment & Decoupled Target Path Policy Audit | `COMPLETED` | `PENDING_COMMIT` | `PASS` (239/239) | `VERIFIED` | `PENDING_PUSH` |
 | 4 | `WAVE-01-TASK-04` | Monorepo Submodule Alignment & Working Tree Baseline Finalization | `NOT_STARTED` | `PENDING` | `NOT_RUN` | `NOT_VERIFIED` | `NOT_VERIFIED` |
 
 ---
@@ -59,7 +59,8 @@ This manifest represents the authoritative, machine-verifiable task registry for
 - **Allowed Scope**: `manifests/*.manifest.json`, `scripts/verify-sync-manifests.js`, audit handoffs.
 - **Prohibited Scope**: Modifying `Products/` files, repointing target paths to non-existent directories.
 - **Validation**: `verify-sync-manifests.js` (16 assertions), full `npm test` (239 assertions), Next.js build.
-- **Status**: `NOT_STARTED`.
+- **Handoff**: [WAVE_01_TASK_03_HANDOFF.md](./WAVE_01_TASK_03_HANDOFF.md)
+- **Status**: `COMPLETED`.
 
 ---
 
@@ -77,7 +78,7 @@ This manifest represents the authoritative, machine-verifiable task registry for
 ## 4. Completion Summary
 
 - **Total Approved Tasks**: 4
-- **Completed**: 2
+- **Completed**: 3
 - **Blocked**: 0
 - **Requires Review**: 0
-- **Not Started**: 2
+- **Not Started**: 1

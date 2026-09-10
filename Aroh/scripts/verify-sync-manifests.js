@@ -27,9 +27,15 @@ for (const file of manifestFiles) {
 
     console.log(`   ✓ ID: ${manifest.identity.id}`);
     console.log(`   ✓ Name: ${manifest.identity.name}`);
+    console.log(`   ✓ Target Path: ${manifest.identity.targetPath} (Decoupled Policy)`);
     console.log(`   ✓ Sync Policy: ${manifest.governance.syncPolicy}`);
     console.log(`   ✓ Merge Strategy: ${manifest.governance.mergeStrategy}`);
     console.log(`   ✓ Version: ${manifest.identity.upstreamVersion}`);
+
+    // Verify targetPath is non-empty
+    if (!manifest.identity.targetPath || manifest.identity.targetPath.trim() === "") {
+      throw new Error(`Invalid targetPath in ${file}: must be non-empty string`);
+    }
 
     // Test SemanticSyncEngine Preview
     const preview = SemanticSyncEngine.previewSync(manifest, {

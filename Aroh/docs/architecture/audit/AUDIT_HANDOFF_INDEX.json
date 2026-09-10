@@ -325,6 +325,19 @@
         "WAVE1-TASK02",
         "ADAPT-001"
       ]
+    },
+    {
+      "stage_id": "WAVE-01-TASK-03",
+      "num": "W1T3",
+      "name": "Manifest Governance Alignment & Decoupled Target Path Policy Audit",
+      "status": "COMPLETED",
+      "handoff_path": "WAVE_01_TASK_03_HANDOFF.md",
+      "artifact": "WAVE_01_TASK_03_RECORD",
+      "handoff_status": "READY_FOR_NEXT_STAGE",
+      "stable_ids": [
+        "WAVE1-TASK03",
+        "MAN-001"
+      ]
     }
   ]
 }
