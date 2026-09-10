@@ -2,164 +2,52 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { usePlatformStore, MembershipLevel, formatArosBalance } from "@aroh/asdk";
+import {
+  usePlatformStore,
+  formatArosBalance,
+  CANONICAL_PRODUCT_REGISTRY,
+  ProductShowcase,
+  getAllProducts,
+  getProductCategories,
+  ProductDetails,
+  registeredProducts,
+  launchProductWebpage
+} from "@aroh/asdk";
 import { Button } from "@aroh/ads";
 import { motion } from "framer-motion";
 import ArohLogo from "../components/aroh-logo";
 
-export interface ProductDetails {
-  id: string;
-  name: string;
-  badge: string;
-  description: string;
-  longDescription: string;
-  requiredTier: MembershipLevel;
-  price: number;
-  version: string;
-  author: string;
-  url?: string;
-  internalOnly?: boolean;
-}
-
-export const registeredProducts: ProductDetails[] = [
-  {
-    id: "omnistream",
-    name: "OmniStream",
-    badge: "AI Tools",
-    description: "Dual-mode video intelligence streaming platform featuring Cinemorph AI and UTube.",
-    longDescription: "OmniStream is a high-performance dual-mode video intelligence platform. Features include Cinemorph AI WebGL 3D theater with ML framing geometry, aperture-matched printing ticket intro animations, and UTube search and playback.",
-    requiredTier: "basic",
-    price: 150,
-    version: "v1.0.0",
-    author: "Uday Patnala",
-    url: "https://github.com/UdayPatnala/omnistream"
-  },
-  {
-    id: "nebula",
-    name: "Nebula",
-
-    badge: "Ecosystem Service",
-    description: "AI-powered personal media intelligence platform for story-driven galleries.",
-    longDescription: "Nebula is a personal media intelligence platform for transforming collections of photos and videos into interactive, story-driven galleries. It includes a 5-stage analysis pipeline and ambient gallery builders.",
-    requiredTier: "pro",
-    price: 200,
-    version: "v1.4.2",
-    author: "Uday Patnala",
-    url: "https://github.com/UdayPatnala/nebula"
-  },
-  {
-    id: "spedex",
-    name: "SpeDex",
-    badge: "Analytics",
-    description: "Fintech speed and spending analytics dashboard for budgets and tracking.",
-    longDescription: "SpeDex is a fintech workspace for tracking how fast money moves and where it goes. It blends spending and budget speed indexes into one unified analytics product.",
-    requiredTier: "pro",
-    price: 300,
-    version: "v2.1.0",
-    author: "Uday Patnala",
-    url: "https://github.com/UdayPatnala/Spedex"
-  },
-  {
-    id: "music-mirror",
-    name: "Music Mirror",
-    badge: "AI Tools",
-    description: "Facial expression mapping and mood-based music recommender player.",
-    longDescription: "Emotion Music Recommender reads facial expressions in the browser using face-api.js, maps that mood to play curated tracks inside an embedded player UI.",
-    requiredTier: "basic",
-    price: 100,
-    version: "v1.2.0",
-    author: "Uday Patnala",
-    url: "https://github.com/UdayPatnala/music-mirror"
-  },
-  {
-    id: "javapath-pro",
-    name: "JavaPath Pro",
-    badge: "Developer Service",
-    description: "Interactive coding sandbox and AI mentor platform to master Java syntax.",
-    longDescription: "An interactive full-stack learning platform designed to help junior developers master Java syntax, object-oriented concepts, and enterprise software patterns through a simulated corporate ticketing system.",
-    requiredTier: "pro",
-    price: 150,
-    version: "v1.1.0",
-    author: "Uday Patnala",
-    url: "https://github.com/UdayPatnala/Java-Path"
-  },
-  {
-    id: "aros-wallet",
-    name: "Aros Core Wallet",
-    badge: "Core Service",
-    description: "Centralized financial engine. Authorizes token credits, debits, and records audited transaction logs.",
-    longDescription: "The Aros Core Wallet is the financial baseline of the AROH Platform. It maintains an immutable ledger of transactions, upgrades, and administrative adjustments.",
-    requiredTier: "basic",
-    price: 0,
-    version: "v1.0.1",
-    author: "AROH Core Team",
-    url: "/dashboard"
-  },
-  {
-    id: "aroh-cms",
-    name: "Aroh CMS Alerts",
-    badge: "Ecosystem Service",
-    description: "Unified announcement server. Enables content operators to schedule notifications and configure layouts.",
-    longDescription: "Aroh CMS Alerts provides administrative editors with editorial tools to publish announcements directly to the ecosystem landing page.",
-    requiredTier: "pro",
-    price: 100,
-    version: "v1.0.0",
-    author: "AROH Content Team",
-    url: "/cms",
-    internalOnly: true
-  },
-  {
-    id: "aros-metrics",
-    name: "Aros Metrics Engine",
-    badge: "Analytics",
-    description: "Observation utility. Generates platform statistics, memory charts, and tracks active user journeys.",
-    longDescription: "The Aros Metrics Engine aggregates CPU usage, active WebSocket connections, ledger clearance durations, and user journey analytics.",
-    requiredTier: "pro",
-    price: 100,
-    version: "v0.9.4-beta",
-    author: "AROH Devops Group",
-    url: "/admin",
-    internalOnly: true
-  }
-];
-
-export const launchProductWebpage = (prod: ProductDetails, router: { push: (url: string) => void }) => {
-  if (!prod.url) {
-    router.push(`/explore/${prod.id}`);
-    return;
-  }
-  if (prod.url.startsWith("http://") || prod.url.startsWith("https://")) {
-    window.open(prod.url, "_blank", "noopener,noreferrer");
-  } else {
-    router.push(prod.url);
-  }
-};
-
-const categories = ["All", "Core Service", "Ecosystem Service", "Analytics", "Developer Service", "AI Tools"];
+// Re-export for any external consumers
+export { type ProductDetails, registeredProducts, launchProductWebpage };
 
 export default function ExplorePage() {
   const router = useRouter();
   const { user, wallet, isAuthenticated } = usePlatformStore();
   const [searchQuery, setSearchQuery] = React.useState("");
   const [selectedCategory, setSelectedCategory] = React.useState("All");
+  const [selectedStatus, setSelectedStatus] = React.useState<string>("all");
 
   const isPrivilegedUser = user?.role === "admin" || user?.role === "operator";
 
-  const visibleProducts = registeredProducts.filter((prod) => {
-    if (prod.internalOnly && !isPrivilegedUser) return false;
-    return true;
-  });
+  const allCategories = React.useMemo(() => getProductCategories(), []);
 
-  const filteredProducts = visibleProducts.filter((prod) => {
-    const matchesSearch =
-      prod.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      prod.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === "All" || prod.badge === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  const visibleProducts = React.useMemo(() => {
+    return getAllProducts({
+      includeInternal: isPrivilegedUser,
+      category: selectedCategory === "All" ? undefined : selectedCategory,
+      searchQuery: searchQuery.trim() || undefined
+    }).filter((prod) => {
+      if (selectedStatus === "all") return true;
+      return prod.status === selectedStatus;
+    });
+  }, [isPrivilegedUser, selectedCategory, searchQuery, selectedStatus]);
 
-  const handleLaunchProduct = (prod: ProductDetails) => {
+  const handleLaunchProduct = (prod: ProductShowcase) => {
     launchProductWebpage(prod, router);
+  };
+
+  const handleInspectProduct = (prod: ProductShowcase) => {
+    router.push(`/explore/${prod.productId}`);
   };
 
   return (
@@ -170,48 +58,93 @@ export default function ExplorePage() {
           <div className="flex items-center gap-4 cursor-pointer" onClick={() => router.push("/")}>
             <ArohLogo size={40} />
             <div>
-              <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">
-                Ecosystem Explorer
-              </h1>
-              <p className="text-slate-500 text-xs mt-0.5">
-                Discover and launch applications and software products in the AROH Ecosystem.
+              <div className="flex items-center gap-2">
+                <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">
+                  Ecosystem Explorer
+                </h1>
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-sky-50 text-sky-700 border border-sky-200">
+                  VERIFIED REGISTRY
+                </span>
+              </div>
+              <p className="text-slate-500 text-xs mt-1">
+                Data-driven showcase of interconnected applications and services in the AROH Ecosystem.
               </p>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Button variant="secondary" onClick={() => router.push("/")} className="px-4 text-xs bg-white text-slate-800 border-black/10 hover:bg-slate-50">
+            <Button
+              variant="secondary"
+              onClick={() => router.push("/")}
+              className="px-4 text-xs bg-white text-slate-800 border-black/10 hover:bg-slate-50 cursor-pointer"
+            >
               Home
             </Button>
             {isAuthenticated && (
-              <div className="bg-white border border-black/10 px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold text-slate-800 shadow-sm">
+              <div className="bg-white border border-black/10 px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold text-slate-800 shadow-sm flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-500" />
                 {formatArosBalance(wallet?.balance, user?.role)}
               </div>
             )}
           </div>
         </div>
 
-        {/* Search & Category Filter Section */}
-        <div className="flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center">
-          <div className="flex-1 max-w-md relative">
-            <label htmlFor="productSearch" className="sr-only">Search products</label>
-            <input
-              id="productSearch"
-              type="text"
-              placeholder="Search products by name or feature..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl bg-white border border-black/10 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-sky-500 transition-colors text-xs shadow-sm"
-            />
+        {/* Filter Controls */}
+        <div className="space-y-4">
+          {/* Search bar & Status filter */}
+          <div className="flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center">
+            <div className="flex-1 max-w-md relative">
+              <label htmlFor="productSearch" className="sr-only">Search products</label>
+              <input
+                id="productSearch"
+                type="text"
+                placeholder="Search by name, capability, or technology..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-4 py-2.5 rounded-xl bg-white border border-black/10 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-900 transition-colors text-xs shadow-sm"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3 top-2.5 text-xs text-slate-400 hover:text-slate-600"
+                  aria-label="Clear search"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+
+            {/* Status Segmented Control */}
+            <div className="flex items-center gap-1.5 bg-slate-100/80 p-1 rounded-xl border border-black/5 text-xs">
+              {[
+                { id: "all", label: "All Statuses" },
+                { id: "online", label: "🟢 Live / Online" },
+                { id: "development", label: "🟡 Source Verified" }
+              ].map((s) => (
+                <button
+                  key={s.id}
+                  onClick={() => setSelectedStatus(s.id)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                    selectedStatus === s.id
+                      ? "bg-white text-slate-900 shadow-sm font-bold"
+                      : "text-slate-500 hover:text-slate-800"
+                  }`}
+                >
+                  {s.label}
+                </button>
+              ))}
+            </div>
           </div>
 
-          <div className="flex flex-wrap gap-2">
-            {categories.map((cat) => (
+          {/* Category Chips */}
+          <div className="flex flex-wrap gap-2 pt-1">
+            {allCategories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
                   selectedCategory === cat
-                    ? "bg-slate-900 text-white border-slate-900 font-bold"
+                    ? "bg-slate-900 text-white border-slate-900 font-bold shadow-sm"
                     : "bg-white text-slate-600 border-black/5 hover:border-slate-300 hover:text-slate-900 shadow-sm"
                 }`}
               >
@@ -222,57 +155,144 @@ export default function ExplorePage() {
         </div>
 
         {/* Products Grid */}
-        {filteredProducts.length === 0 ? (
-          <div className="bg-white border border-black/5 rounded-2xl p-12 text-center text-slate-400 text-sm shadow-sm">
-            No products match your search or category criteria.
+        {visibleProducts.length === 0 ? (
+          <div className="bg-white border border-black/5 rounded-2xl p-12 text-center space-y-3 shadow-sm">
+            <p className="text-slate-700 font-semibold text-sm">No ecosystem products match your criteria.</p>
+            <p className="text-slate-400 text-xs">Try resetting your search query or selecting another category.</p>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setSearchQuery("");
+                setSelectedCategory("All");
+                setSelectedStatus("all");
+              }}
+              className="mt-2 text-xs"
+            >
+              Reset Filters
+            </Button>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProducts.map((prod) => (
-              <motion.div
-                key={prod.id}
-                whileHover={{ scale: 1.01 }}
-                onClick={() => handleLaunchProduct(prod)}
-                className="bg-white border border-black/5 rounded-2xl p-6 flex flex-col justify-between hover:border-slate-400 hover:shadow-lg transition-all cursor-pointer group shadow-sm"
-              >
-                <div className="space-y-4">
-                  <div className="flex justify-between items-start">
-                    <span className="px-2.5 py-0.5 rounded text-[8px] uppercase font-bold tracking-wider bg-slate-100 text-slate-700 border border-slate-200">
-                      {prod.badge}
-                    </span>
-                    <span className="px-2 py-0.5 rounded text-[8px] uppercase font-bold tracking-wider bg-slate-50 text-slate-600 border border-slate-200">
-                      {prod.requiredTier.toUpperCase()}
-                    </span>
+            {visibleProducts.map((prod) => {
+              const isOnline = prod.status === "online";
+              const isDev = prod.status === "development";
+
+              return (
+                <motion.div
+                  key={prod.productId}
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.15 }}
+                  onClick={() => handleInspectProduct(prod)}
+                  className="bg-white border border-black/5 rounded-2xl p-6 flex flex-col justify-between hover:border-slate-300 hover:shadow-md transition-all cursor-pointer group shadow-sm"
+                >
+                  <div className="space-y-4">
+                    {/* Status & Tier Header */}
+                    <div className="flex justify-between items-center gap-2">
+                      <div className="flex items-center gap-1.5">
+                        {isOnline && (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                            LIVE
+                          </span>
+                        )}
+                        {isDev && (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                            DEV / REPO
+                          </span>
+                        )}
+                        {prod.status === "internal" && (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                            INTERNAL
+                          </span>
+                        )}
+                        <span className="px-2 py-0.5 rounded text-[9px] font-mono uppercase font-semibold text-slate-500 bg-slate-100">
+                          {prod.category}
+                        </span>
+                      </div>
+
+                      <span className="px-2 py-0.5 rounded text-[9px] uppercase font-bold tracking-wider bg-slate-50 text-slate-600 border border-slate-200 font-mono">
+                        {prod.requiredTier.toUpperCase()}
+                      </span>
+                    </div>
+
+                    {/* Product Title & Tagline */}
+                    <div>
+                      <h3 className="text-xl font-bold text-slate-900 group-hover:text-sky-600 transition-colors leading-tight flex items-center justify-between">
+                        {prod.name}
+                        <span className="text-xs font-semibold text-sky-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                          Details →
+                        </span>
+                      </h3>
+                      <p className="text-slate-500 text-[11px] font-medium mt-1 leading-snug">
+                        {prod.tagline}
+                      </p>
+                    </div>
+
+                    {/* Short Description */}
+                    <p className="text-slate-600 text-xs leading-relaxed line-clamp-3 font-normal">
+                      {prod.shortDescription}
+                    </p>
+
+                    {/* Primary Capabilities Pills */}
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      {prod.primaryCapabilities.slice(0, 3).map((cap, i) => (
+                        <span
+                          key={i}
+                          className="px-2 py-0.5 rounded-md text-[9px] bg-slate-50 border border-slate-200/80 text-slate-600 font-mono font-medium"
+                        >
+                          {cap.title}
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
-                  <h3 className="text-xl font-bold text-slate-900 group-hover:text-sky-600 transition-colors leading-tight flex items-center justify-between">
-                    {prod.name}
-                    <span className="text-xs font-semibold text-sky-600 opacity-0 group-hover:opacity-100 transition-opacity">Launch ↗</span>
-                  </h3>
-                  <p className="text-slate-600 text-xs leading-relaxed line-clamp-3 font-normal">
-                    {prod.description}
-                  </p>
-                </div>
-
-                <div className="border-t border-black/5 pt-4 mt-6 flex justify-between items-center text-xs">
-                  <span className="text-slate-400 font-mono text-[10px]">{prod.version}</span>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleLaunchProduct(prod);
-                    }}
-                    className="px-3 py-1.5 rounded-lg bg-slate-900 text-white font-bold text-[11px] group-hover:bg-sky-600 transition-colors shadow-sm cursor-pointer"
-                  >
-                    Launch Webpage ↗
-                  </button>
-                </div>
-              </motion.div>
-            ))}
+                  {/* Card Footer */}
+                  <div className="border-t border-black/5 pt-4 mt-6 flex justify-between items-center text-xs">
+                    <span className="text-slate-400 font-mono text-[10px]">{prod.version}</span>
+                    <div className="flex items-center gap-2">
+                      {prod.liveUrl ? (
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleLaunchProduct(prod);
+                          }}
+                          className="px-3 py-1.5 rounded-lg bg-slate-900 text-white font-bold text-[11px] hover:bg-sky-600 transition-colors shadow-sm cursor-pointer"
+                        >
+                          Launch Live ↗
+                        </button>
+                      ) : prod.githubUrl ? (
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (prod.githubUrl) window.open(prod.githubUrl, "_blank", "noopener,noreferrer");
+                          }}
+                          className="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-800 hover:bg-slate-200 border border-black/10 font-bold text-[11px] transition-colors shadow-sm cursor-pointer"
+                        >
+                          GitHub Repo ↗
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleInspectProduct(prod);
+                          }}
+                          className="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-800 hover:bg-slate-200 font-bold text-[11px] transition-colors cursor-pointer"
+                        >
+                          Explore →
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         )}
       </div>
     </div>
   );
 }
-

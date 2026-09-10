@@ -4,4 +4,4 @@ export * from "./services/token";
 export * from "./store/index";
 export * from "./sync/index";
 export * from "./ai/provider";
-
+export * from "./registry/products";

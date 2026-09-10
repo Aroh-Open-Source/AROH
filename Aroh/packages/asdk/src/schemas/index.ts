@@ -62,3 +62,5 @@ export const AnnouncementSchema = z.object({
   authorId: z.string()
 });
 export type Announcement = z.infer<typeof AnnouncementSchema>;
+
+export * from "./product";

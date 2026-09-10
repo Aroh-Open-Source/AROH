@@ -182,16 +182,23 @@ const conflictPlan = SemanticReconciler.planReconciliation(mockManifest, {
 assert(conflictPlan.hasConflicts === true, "Divergent three-way change flagged as conflict");
 assert(conflictPlan.items.some(i => i.conflict && i.conflict.category === "concurrent_modification"), "Classifies conflict as concurrent_modification");
 
-// 14. Idempotency Test
+// 14. Idempotency Test (Hermetic Isolation)
 console.log("\n--- Test 14: Synchronization Idempotency ---");
-const applyRes1 = runCli(["apply", "--product", "spedex", "--confirm", "--json"]);
-assert(applyRes1.status === 0, "First apply succeeds");
+const spedexManifestPath = path.join(__dirname, "..", "manifests", "spedex-core.manifest.json");
+const originalSpedexManifest = fs.readFileSync(spedexManifestPath, "utf-8");
 
-const statusAfter = runCli(["status", "--product", "spedex", "--json"]);
-assert(statusAfter.json.baseline[0].isClean === true, "Status reports clean and synchronized after apply");
+try {
+  const applyRes1 = runCli(["apply", "--product", "spedex", "--confirm", "--json"]);
+  assert(applyRes1.status === 0, "First apply succeeds");
 
-const planAfter = runCli(["plan", "--product", "spedex", "--json"]);
-assert(planAfter.json.plan.summary.actionsPlanned === 0, "Subsequent plan produces 0 planned actions (Idempotent)");
+  const statusAfter = runCli(["status", "--product", "spedex", "--json"]);
+  assert(statusAfter.json.baseline[0].isClean === true, "Status reports clean and synchronized after apply");
+
+  const planAfter = runCli(["plan", "--product", "spedex", "--json"]);
+  assert(planAfter.json.plan.summary.actionsPlanned === 0, "Subsequent plan produces 0 planned actions (Idempotent)");
+} finally {
+  fs.writeFileSync(spedexManifestPath, originalSpedexManifest, "utf-8");
+}
 
 console.log("\n=================================================");
 console.log(` Summary: ${passed} Passed / ${failed} Failed`);
