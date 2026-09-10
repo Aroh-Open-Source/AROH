@@ -22,7 +22,7 @@ This manifest represents the authoritative, machine-verifiable task registry for
 | 1 | `WAVE-01-TASK-01` | Working Tree Harmonization & Submodule Pointer Alignment | `COMPLETED` | `8ce4df0` | `PASS` (227/227) | `VERIFIED` | `VERIFIED` |
 | 2 | `WAVE-01-TASK-02` | Spoke Adapter Interface Contract Specification in `@aroh/asdk` | `COMPLETED` | `2f740f7` | `PASS` (239/239) | `VERIFIED` | `VERIFIED` |
 | 3 | `WAVE-01-TASK-03` | Manifest Governance Alignment & Decoupled Target Path Policy Audit | `COMPLETED` | `bc8b82b` | `PASS` (239/239) | `VERIFIED` | `VERIFIED` |
-| 4 | `WAVE-01-TASK-04` | Monorepo Submodule Alignment & Working Tree Baseline Finalization | `COMPLETED` | `PENDING_COMMIT` | `PASS` (239/239) | `VERIFIED` | `PENDING_PUSH` |
+| 4 | `WAVE-01-TASK-04` | Monorepo Submodule Alignment & Working Tree Baseline Finalization | `COMPLETED` | `ee50af8` | `PASS` (239/239) | `VERIFIED` | `VERIFIED` |
 
 ---
 
@@ -72,7 +72,7 @@ This manifest represents the authoritative, machine-verifiable task registry for
 - **Prohibited Scope**: Modifying `Products/` files.
 - **Validation**: `git status --short` clean, `npm test` (239 assertions), Next.js build.
 - **Handoff**: [WAVE_01_TASK_04_HANDOFF.md](./WAVE_01_TASK_04_HANDOFF.md)
-- **Status**: `COMPLETED`.
+- **Status**: `COMPLETED` (Commit `ee50af8`).
 
 ---
 
