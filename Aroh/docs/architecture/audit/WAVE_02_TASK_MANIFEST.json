@@ -1,0 +1,430 @@
+{
+  "wave": "WAVE_02",
+  "manifest_version": "1.0.0",
+  "generated_at": "2026-09-10T11:55:00+05:30",
+  "canonical_remote": "https://github.com/Aroh-Open-Source/AROH",
+  "canonical_branch": "main",
+  "source_of_truth": [
+    "Aroh/docs/architecture/AROH_LIVING_ARCHITECTURE_INTELLIGENCE.md (Section 10 Phase 3.0 & Phase 3.5)",
+    "Aroh/docs/architecture/audit/STAGE_20_HANDOFF.md (Wave 2/3/4 approved sequence)",
+    "Aroh/docs/governance/D2_EXECUTION_AND_DATA_SYSTEM.md (Security, Events, Background Jobs, API Contracts)",
+    "Aroh/docs/governance/D3_GOVERNANCE_AND_EVOLUTION.md (Phase Governance, Definition of Done)",
+    "Aroh/docs/governance/D1_EXPERIENCE_AND_BEHAVIOR.md",
+    "Aroh/docs/architecture/ADAPTER_CONTRACT_SPECIFICATION.md",
+    "Aroh/docs/architecture/audit/WAVE_01_FINAL_HANDOFF.md",
+    "Aroh/docs/architecture/audit/WAVE_01_TASK_MANIFEST.json"
+  ],
+  "starting_commit": "869a69d85c21a39145dfa20363eb2793c065e9e0",
+  "wave_1_final_sha": "869a69d85c21a39145dfa20363eb2793c065e9e0",
+  "wave_1_baseline": {
+    "tests_passing": 239,
+    "build_routes": 14,
+    "products_writes": 0,
+    "working_tree": "clean"
+  },
+  "tasks": [
+    {
+      "task_id": "WAVE-02-TASK-01",
+      "sequence": 1,
+      "title": "Developer API Key Vault — Schema, Service & Dashboard Route",
+      "objective": "Implement the Developer API Key Vault feature enabling developers to generate, list, revoke, and manage HMAC-SHA256-signed API keys with prefix 'aroh_live_' (production) and 'aroh_test_' (test). Keys must be tier-gated (Basic: 60 rpm, Pro: 300 rpm, Enterprise: 1200 rpm). Implement the /dashboard/keys route, the key management Zod schema in @aroh/asdk, the server-side generation service, and Firestore persistence layer.",
+      "authoritative_source": "Aroh/docs/architecture/AROH_LIVING_ARCHITECTURE_INTELLIGENCE.md",
+      "source_section": "Section 10, Phase 3.0, Milestone 3.1",
+      "prerequisites": [
+        "WAVE-01-FINAL completed and verified at 869a69d",
+        "239/239 tests passing",
+        "14-route build clean",
+        "Products/ inviolate"
+      ],
+      "dependencies": [],
+      "allowed_scope": [
+        "Aroh/packages/asdk/src/schemas/api-key.ts (new)",
+        "Aroh/packages/asdk/src/services/api-key.ts (new)",
+        "Aroh/packages/asdk/src/index.ts (export additions only)",
+        "Aroh/apps/web/app/dashboard/keys/page.tsx (new route)",
+        "Aroh/apps/web/app/api/developer/keys/route.ts (new API route)",
+        "Aroh/apps/web/app/api/developer/keys/[keyId]/route.ts (new API route)",
+        "Aroh/packages/asdk/tests/api-key.test.ts (new)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_01_HANDOFF.md (new)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_01_HANDOFF.json (new)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_MANIFEST.md (update)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_MANIFEST.json (update)",
+        "Aroh/docs/architecture/audit/AUDIT_HANDOFF_INDEX.md (update)",
+        "Aroh/docs/architecture/audit/AUDIT_HANDOFF_INDEX.json (update)",
+        "Aroh/docs/architecture/VERSION_HISTORY.md (update)"
+      ],
+      "prohibited_scope": [
+        "Products/ files (zero modifications)",
+        "Modifying existing schema types in ways that break existing 239 tests",
+        "Storing raw API key values in plaintext Firestore documents",
+        "Implementing client-side key generation or balance logic",
+        "Creating speculative spoke adapter capsules",
+        "Implementing Wave 2 Task 02 (Webhook) prematurely"
+      ],
+      "security_requirements": [
+        "HMAC-SHA256 signed tokens using Node.js crypto module",
+        "Key prefix must distinguish aroh_live_ (production) and aroh_test_ (test/sandbox)",
+        "Store only key hash (SHA-256) in Firestore — never the raw key value",
+        "Key is shown exactly once upon creation; subsequent reads return masked form",
+        "Tier-gated rate limits enforced server-side: Basic 60rpm, Pro 300rpm, Enterprise 1200rpm",
+        "Authorization: only authenticated user can manage their own keys",
+        "Key revocation must be irreversible within same request (no undelete)",
+        "API routes must use Zod schema validation on all inputs"
+      ],
+      "expected_artifacts": [
+        "Aroh/packages/asdk/src/schemas/api-key.ts",
+        "Aroh/packages/asdk/src/services/api-key.ts",
+        "Aroh/apps/web/app/dashboard/keys/page.tsx",
+        "Aroh/apps/web/app/api/developer/keys/route.ts",
+        "Aroh/apps/web/app/api/developer/keys/[keyId]/route.ts",
+        "Aroh/packages/asdk/tests/api-key.test.ts",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_01_HANDOFF.md",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_01_HANDOFF.json"
+      ],
+      "expected_tests": [
+        "npm test in Aroh (239+ assertions, all passing)",
+        "Targeted: npx vitest run packages/asdk/tests/api-key.test.ts",
+        "npm run build (14+ routes, clean)"
+      ],
+      "expected_documentation": [
+        "VERSION_HISTORY.md v2.1.0",
+        "WAVE_02_TASK_01_HANDOFF.md",
+        "WAVE_02_TASK_MANIFEST.md updated"
+      ],
+      "expected_commit": "feat(developer): implement API key vault schema, service, and dashboard route [Wave 2 Task 1]",
+      "rollback_checkpoint": "Create a git stash or tag before starting implementation: git tag WAVE-02-TASK-01-START",
+      "retry_threshold": 3,
+      "external_side_effects": [
+        "Firestore: new developer_api_keys collection (creation only, no deletion of existing data)"
+      ],
+      "resume_condition": "If blocked, stash all work, record WAVE-02-TASK-01-BLOCKED handoff, and continue only if Task 02 is independently executable",
+      "execution_status": "NOT_STARTED",
+      "start_commit": null,
+      "completion_commit": null,
+      "validation_status": "NOT_RUN",
+      "products_boundary_status": "NOT_VERIFIED",
+      "remote_parity_status": "NOT_VERIFIED",
+      "handoff_path": null,
+      "blockers": [],
+      "final_classification": null
+    },
+    {
+      "task_id": "WAVE-02-TASK-02",
+      "sequence": 2,
+      "title": "Asynchronous Webhook Clearance Engine",
+      "objective": "Implement the Asynchronous Webhook Clearance Engine enabling developers to register webhook endpoints and receive signed event notifications for platform events. Implement: webhook endpoint registration schema and CRUD, event dispatcher with HMAC-SHA256 signature header (x-aroh-signature), exponential backoff retry (3 attempts, 2^n * 500ms), and the four initial event types: aros.credited, aros.debited, membership.upgraded, challenge.completed.",
+      "authoritative_source": "Aroh/docs/architecture/AROH_LIVING_ARCHITECTURE_INTELLIGENCE.md",
+      "source_section": "Section 10, Phase 3.0, Milestone 3.2",
+      "prerequisites": [
+        "WAVE-02-TASK-01 completed and verified (API Key Vault must exist as the developer identity and auth layer)"
+      ],
+      "dependencies": [
+        "WAVE-02-TASK-01"
+      ],
+      "allowed_scope": [
+        "Aroh/packages/asdk/src/schemas/webhook.ts (new)",
+        "Aroh/packages/asdk/src/services/webhook.ts (new)",
+        "Aroh/packages/asdk/src/index.ts (export additions only)",
+        "Aroh/apps/web/app/api/developer/webhooks/route.ts (new)",
+        "Aroh/apps/web/app/api/developer/webhooks/[webhookId]/route.ts (new)",
+        "Aroh/packages/asdk/tests/webhook.test.ts (new)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_02_HANDOFF.md (new)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_02_HANDOFF.json (new)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_MANIFEST.md (update)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_MANIFEST.json (update)",
+        "Aroh/docs/architecture/audit/AUDIT_HANDOFF_INDEX.md (update)",
+        "Aroh/docs/architecture/audit/AUDIT_HANDOFF_INDEX.json (update)",
+        "Aroh/docs/architecture/VERSION_HISTORY.md (update)"
+      ],
+      "prohibited_scope": [
+        "Products/ files (zero modifications)",
+        "Implementing a real background job queue (use in-process queue stub for now)",
+        "Making real outbound HTTP calls to external webhook endpoints in tests",
+        "Implementing Task 03 (Fiat On-Ramp) prematurely"
+      ],
+      "security_requirements": [
+        "Each webhook delivery signed with HMAC-SHA256 using developer's API key secret as the signing key",
+        "Signature delivered in x-aroh-signature header in format: sha256=<hex>",
+        "Retry policy: exponential backoff, max 3 attempts, delay = 2^attempt * 500ms",
+        "Events must include: type, version, timestamp, source, entity_ref, payload, correlation_id",
+        "Events must not contain secrets or sensitive PII beyond required entity reference",
+        "Webhook URLs must be validated as HTTPS-only (no plaintext HTTP)",
+        "Webhook endpoint must be user-owned: only the registering developer can delete or list"
+      ],
+      "expected_artifacts": [
+        "Aroh/packages/asdk/src/schemas/webhook.ts",
+        "Aroh/packages/asdk/src/services/webhook.ts",
+        "Aroh/apps/web/app/api/developer/webhooks/route.ts",
+        "Aroh/apps/web/app/api/developer/webhooks/[webhookId]/route.ts",
+        "Aroh/packages/asdk/tests/webhook.test.ts",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_02_HANDOFF.md",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_02_HANDOFF.json"
+      ],
+      "expected_tests": [
+        "npm test in Aroh (all previous assertions + new webhook tests, all passing)",
+        "Targeted: npx vitest run packages/asdk/tests/webhook.test.ts",
+        "npm run build (14+ routes, clean)"
+      ],
+      "expected_documentation": [
+        "VERSION_HISTORY.md v2.1.1",
+        "WAVE_02_TASK_02_HANDOFF.md",
+        "WAVE_02_TASK_MANIFEST.md updated"
+      ],
+      "expected_commit": "feat(developer): implement async webhook clearance engine [Wave 2 Task 2]",
+      "rollback_checkpoint": "git tag WAVE-02-TASK-02-START before implementation",
+      "retry_threshold": 3,
+      "external_side_effects": [
+        "Firestore: new developer_webhooks collection (creation only)",
+        "NOTE: Outbound webhook dispatch is stubbed in test mode; no real HTTP calls made during tests"
+      ],
+      "resume_condition": "If blocked on TASK-01 dependency, enter BLOCKED state and stop",
+      "execution_status": "NOT_STARTED",
+      "start_commit": null,
+      "completion_commit": null,
+      "validation_status": "NOT_RUN",
+      "products_boundary_status": "NOT_VERIFIED",
+      "remote_parity_status": "NOT_VERIFIED",
+      "handoff_path": null,
+      "blockers": [],
+      "final_classification": null
+    },
+    {
+      "task_id": "WAVE-02-TASK-03",
+      "sequence": 3,
+      "title": "Fiat-to-Aros Settlement On-Ramp (Stripe Checkout)",
+      "objective": "Implement the Fiat-to-Aros Settlement On-Ramp enabling users to purchase Aros tokens via Stripe Checkout sessions using Next.js server actions. Conversion rate: $1.00 USD = 100 Aros. The settlement must use the immutable Aros ledger service (no direct balance writes), and Stripe webhook events must be processed through the Webhook Clearance Engine (WAVE-02-TASK-02).",
+      "authoritative_source": "Aroh/docs/architecture/AROH_LIVING_ARCHITECTURE_INTELLIGENCE.md",
+      "source_section": "Section 10, Phase 3.0, Milestone 3.3",
+      "prerequisites": [
+        "WAVE-02-TASK-01 completed (API Key Vault)",
+        "WAVE-02-TASK-02 completed (Webhook Clearance Engine — Stripe webhook events use it)"
+      ],
+      "dependencies": [
+        "WAVE-02-TASK-01",
+        "WAVE-02-TASK-02"
+      ],
+      "allowed_scope": [
+        "Aroh/packages/asdk/src/schemas/payment.ts (new)",
+        "Aroh/packages/asdk/src/services/payment.ts (new)",
+        "Aroh/packages/asdk/src/index.ts (export additions only)",
+        "Aroh/apps/web/app/api/payment/checkout/route.ts (new)",
+        "Aroh/apps/web/app/api/payment/webhook/route.ts (new)",
+        "Aroh/apps/web/app/dashboard/purchase/page.tsx (new)",
+        "Aroh/packages/asdk/tests/payment.test.ts (new)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_03_HANDOFF.md (new)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_03_HANDOFF.json (new)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_MANIFEST.md (update)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_MANIFEST.json (update)",
+        "Aroh/docs/architecture/audit/AUDIT_HANDOFF_INDEX.md (update)",
+        "Aroh/docs/architecture/audit/AUDIT_HANDOFF_INDEX.json (update)",
+        "Aroh/docs/architecture/VERSION_HISTORY.md (update)"
+      ],
+      "prohibited_scope": [
+        "Products/ files (zero modifications)",
+        "Direct Firestore balance writes (must use ledger transaction records)",
+        "Hard-coding Stripe keys in source files (must use environment variables)",
+        "Implementing real Stripe API calls in test environment (use mock Stripe mode)",
+        "Implementing Phase 3.5 tasks prematurely"
+      ],
+      "security_requirements": [
+        "Stripe secret key must only exist in server-side environment variables (STRIPE_SECRET_KEY)",
+        "Stripe webhook secret must be used to validate all incoming Stripe webhook events (STRIPE_WEBHOOK_SECRET)",
+        "Conversion rate ($1.00 = 100 Aros) must be enforced server-side only",
+        "Idempotency: Stripe payment_intent or charge ID used as deduplication key to prevent double-crediting",
+        "D2 Aros Execution flow: Authenticate → Authorize → Validate → Idempotency Check → Atomic Economic Operation → Persist → Verify → Event → Response"
+      ],
+      "expected_artifacts": [
+        "Aroh/packages/asdk/src/schemas/payment.ts",
+        "Aroh/packages/asdk/src/services/payment.ts",
+        "Aroh/apps/web/app/api/payment/checkout/route.ts",
+        "Aroh/apps/web/app/api/payment/webhook/route.ts",
+        "Aroh/apps/web/app/dashboard/purchase/page.tsx",
+        "Aroh/packages/asdk/tests/payment.test.ts",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_03_HANDOFF.md",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_03_HANDOFF.json"
+      ],
+      "expected_tests": [
+        "npm test in Aroh (all previous assertions + new payment tests, all passing)",
+        "Targeted: npx vitest run packages/asdk/tests/payment.test.ts",
+        "npm run build (14+ routes, clean)"
+      ],
+      "expected_documentation": [
+        "VERSION_HISTORY.md v2.1.2",
+        "WAVE_02_TASK_03_HANDOFF.md",
+        "WAVE_02_TASK_MANIFEST.md updated"
+      ],
+      "expected_commit": "feat(payment): implement fiat-to-aros settlement on-ramp via Stripe Checkout [Wave 2 Task 3]",
+      "rollback_checkpoint": "git tag WAVE-02-TASK-03-START before implementation",
+      "retry_threshold": 3,
+      "external_side_effects": [
+        "Stripe: requires STRIPE_SECRET_KEY and STRIPE_WEBHOOK_SECRET env vars (BLOCKED if not present, report as EXTERNAL_DEPENDENCY_MISSING)",
+        "Firestore: new payment_intents collection for idempotency tracking"
+      ],
+      "resume_condition": "If Stripe env vars are absent, create WAVE-02-TASK-03-BLOCKED handoff citing EXTERNAL_DEPENDENCY_MISSING and proceed to TASK-04 if it is independent",
+      "execution_status": "NOT_STARTED",
+      "start_commit": null,
+      "completion_commit": null,
+      "validation_status": "NOT_RUN",
+      "products_boundary_status": "NOT_VERIFIED",
+      "remote_parity_status": "NOT_VERIFIED",
+      "handoff_path": null,
+      "blockers": [],
+      "final_classification": null
+    },
+    {
+      "task_id": "WAVE-02-TASK-04",
+      "sequence": 4,
+      "title": "W3C Distributed Tracing — traceparent Propagation (Phase 3.5)",
+      "objective": "Propagate W3C traceparent headers across all AROH Next.js API routes and spoke adapter integrations, enabling distributed tracing correlation between the platform hub and external services. Implement a lightweight tracing utility in @aroh/asdk that generates and validates W3C trace context. Middleware must extract or generate traceparent on ingress and attach to all outbound requests.",
+      "authoritative_source": "Aroh/docs/architecture/AROH_LIVING_ARCHITECTURE_INTELLIGENCE.md",
+      "source_section": "Section 10, Phase 3.5, Milestone 3.4",
+      "prerequisites": [
+        "WAVE-02-TASK-01 completed",
+        "WAVE-02-TASK-02 completed",
+        "WAVE-02-TASK-03 completed or independently executable"
+      ],
+      "dependencies": [
+        "WAVE-02-TASK-01",
+        "WAVE-02-TASK-02"
+      ],
+      "allowed_scope": [
+        "Aroh/packages/asdk/src/tracing/index.ts (new)",
+        "Aroh/packages/asdk/src/index.ts (export additions only)",
+        "Aroh/apps/web/middleware.ts (new or modify if exists)",
+        "Aroh/packages/asdk/tests/tracing.test.ts (new)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_04_HANDOFF.md (new)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_04_HANDOFF.json (new)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_MANIFEST.md (update)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_MANIFEST.json (update)",
+        "Aroh/docs/architecture/audit/AUDIT_HANDOFF_INDEX.md (update)",
+        "Aroh/docs/architecture/audit/AUDIT_HANDOFF_INDEX.json (update)",
+        "Aroh/docs/architecture/VERSION_HISTORY.md (update)"
+      ],
+      "prohibited_scope": [
+        "Products/ files (zero modifications)",
+        "Adding external observability vendor SDKs (OpenTelemetry collectors, Datadog, etc.) unless authorized",
+        "Modifying existing API route business logic (only add tracing header injection)",
+        "Implementing Phase 3.5 Task 2 (WebSocket metrics) prematurely"
+      ],
+      "security_requirements": [
+        "traceparent header must be validated on ingress (malformed values must be replaced, not propagated)",
+        "Trace IDs must not contain sensitive user data",
+        "Tracing must not log request bodies or secrets"
+      ],
+      "expected_artifacts": [
+        "Aroh/packages/asdk/src/tracing/index.ts",
+        "Aroh/apps/web/middleware.ts",
+        "Aroh/packages/asdk/tests/tracing.test.ts",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_04_HANDOFF.md",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_04_HANDOFF.json"
+      ],
+      "expected_tests": [
+        "npm test in Aroh (all previous assertions + new tracing tests, all passing)",
+        "Targeted: npx vitest run packages/asdk/tests/tracing.test.ts",
+        "npm run build (14+ routes, clean)"
+      ],
+      "expected_documentation": [
+        "VERSION_HISTORY.md v2.1.3",
+        "WAVE_02_TASK_04_HANDOFF.md",
+        "WAVE_02_TASK_MANIFEST.md updated"
+      ],
+      "expected_commit": "feat(observability): implement W3C traceparent propagation across API routes [Wave 2 Task 4]",
+      "rollback_checkpoint": "git tag WAVE-02-TASK-04-START before implementation",
+      "retry_threshold": 3,
+      "external_side_effects": [],
+      "resume_condition": "Independent of Task 03 (Stripe). Can execute if Tasks 01 and 02 complete.",
+      "execution_status": "NOT_STARTED",
+      "start_commit": null,
+      "completion_commit": null,
+      "validation_status": "NOT_RUN",
+      "products_boundary_status": "NOT_VERIFIED",
+      "remote_parity_status": "NOT_VERIFIED",
+      "handoff_path": null,
+      "blockers": [],
+      "final_classification": null
+    },
+    {
+      "task_id": "WAVE-02-TASK-05",
+      "sequence": 5,
+      "title": "Real-Time Operational Telemetry Broker — WebSocket Metrics Stream (Phase 3.5)",
+      "objective": "Implement a WebSocket-based real-time operational telemetry metrics stream in the /admin route, displaying settlement latency and active user journeys. The metrics broker must consume events from the Aros ledger (WAVE-02-TASK-01 keys layer) and the Webhook Clearance Engine dispatcher (WAVE-02-TASK-02).",
+      "authoritative_source": "Aroh/docs/architecture/AROH_LIVING_ARCHITECTURE_INTELLIGENCE.md",
+      "source_section": "Section 10, Phase 3.5, Milestone 3.5",
+      "prerequisites": [
+        "WAVE-02-TASK-01 completed",
+        "WAVE-02-TASK-02 completed",
+        "WAVE-02-TASK-04 completed (W3C tracing for correlation)"
+      ],
+      "dependencies": [
+        "WAVE-02-TASK-01",
+        "WAVE-02-TASK-02",
+        "WAVE-02-TASK-04"
+      ],
+      "allowed_scope": [
+        "Aroh/packages/asdk/src/telemetry/index.ts (new)",
+        "Aroh/packages/asdk/src/index.ts (export additions only)",
+        "Aroh/apps/web/app/api/telemetry/stream/route.ts (new WebSocket route)",
+        "Aroh/apps/web/app/admin/page.tsx (extend to consume telemetry WebSocket)",
+        "Aroh/packages/asdk/tests/telemetry.test.ts (new)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_05_HANDOFF.md (new)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_05_HANDOFF.json (new)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_MANIFEST.md (update)",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_MANIFEST.json (update)",
+        "Aroh/docs/architecture/audit/AUDIT_HANDOFF_INDEX.md (update)",
+        "Aroh/docs/architecture/audit/AUDIT_HANDOFF_INDEX.json (update)",
+        "Aroh/docs/architecture/VERSION_HISTORY.md (update)"
+      ],
+      "prohibited_scope": [
+        "Products/ files (zero modifications)",
+        "Modifying core Aros ledger transaction logic",
+        "Using external real-time services (Pusher, Ably, etc.) unless explicitly authorized",
+        "Starting Phase 4 / Wave 3 tasks"
+      ],
+      "security_requirements": [
+        "WebSocket endpoint must require authenticated session",
+        "Admin route must enforce role: admin or operator",
+        "Metrics stream must not expose individual user wallet balances or PII"
+      ],
+      "expected_artifacts": [
+        "Aroh/packages/asdk/src/telemetry/index.ts",
+        "Aroh/apps/web/app/api/telemetry/stream/route.ts",
+        "Aroh/apps/web/app/admin/page.tsx (extended)",
+        "Aroh/packages/asdk/tests/telemetry.test.ts",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_05_HANDOFF.md",
+        "Aroh/docs/architecture/audit/WAVE_02_TASK_05_HANDOFF.json"
+      ],
+      "expected_tests": [
+        "npm test in Aroh (all previous assertions + new telemetry tests, all passing)",
+        "Targeted: npx vitest run packages/asdk/tests/telemetry.test.ts",
+        "npm run build (14+ routes, clean)"
+      ],
+      "expected_documentation": [
+        "VERSION_HISTORY.md v2.2.0",
+        "WAVE_02_TASK_05_HANDOFF.md",
+        "WAVE_02_TASK_MANIFEST.md updated"
+      ],
+      "expected_commit": "feat(telemetry): implement real-time WebSocket operational metrics broker [Wave 2 Task 5]",
+      "rollback_checkpoint": "git tag WAVE-02-TASK-05-START before implementation",
+      "retry_threshold": 3,
+      "external_side_effects": [],
+      "resume_condition": "Blocked if TASK-04 not complete (requires traceparent for correlation). Enter WAVE-02-TASK-05-BLOCKED if dependencies not met.",
+      "execution_status": "NOT_STARTED",
+      "start_commit": null,
+      "completion_commit": null,
+      "validation_status": "NOT_RUN",
+      "products_boundary_status": "NOT_VERIFIED",
+      "remote_parity_status": "NOT_VERIFIED",
+      "handoff_path": null,
+      "blockers": [],
+      "final_classification": null
+    }
+  ],
+  "completion": {
+    "total_tasks": 5,
+    "completed": 0,
+    "blocked": 0,
+    "requires_review": 0,
+    "not_started": 5
+  },
+  "stop_boundary": "After WAVE-02-TASK-05 is committed, pushed, and verified, execute Wave 2 Completion Gate and STOP. Do not begin Phase 4 or Wave 3."
+}
