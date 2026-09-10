@@ -287,6 +287,31 @@
       "stable_ids": [
         "GATE-001"
       ]
+    },
+    {
+      "stage_id": "MIGRATE-01",
+      "num": "M1",
+      "name": "Canonical Remote Migration Handoff",
+      "status": "COMPLETED",
+      "handoff_path": "CANONICAL_REMOTE_MIGRATION_HANDOFF.md",
+      "artifact": "CANONICAL_REMOTE_MIGRATION_RECORD",
+      "handoff_status": "READY_FOR_NEXT_STAGE",
+      "stable_ids": [
+        "MIGRATE-001"
+      ]
+    },
+    {
+      "stage_id": "WAVE-01-TASK-01",
+      "num": "W1T1",
+      "name": "Working Tree Harmonization & Submodule Pointer Alignment",
+      "status": "COMPLETED",
+      "handoff_path": "WAVE_01_TASK_01_HANDOFF.md",
+      "artifact": "WAVE_01_TASK_01_RECORD",
+      "handoff_status": "READY_FOR_NEXT_STAGE",
+      "stable_ids": [
+        "WAVE1-TASK01",
+        "PIN-001"
+      ]
     }
   ]
 }

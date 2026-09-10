@@ -8,7 +8,8 @@
 
 | Version | Date | Type | Quick Summary | Git Tag | Commit |
 |---|---|:---:|---|:---:|:---:|
-| **v2.0.2** | 2026-09-10 | `PATCH` | **Canonical Product Showcase & Zero-Fabrication Registry**: Implemented `CANONICAL_PRODUCT_REGISTRY` in ASDK, strict Zod schema validation, authoritative URL & capability verification across all 8 products, responsive Explore and Product Detail workspaces, and expanded automated verification to 227 passing assertions across 8 test suites. | `v2.0.2` | `Working Tree (Pending Commit)` |
+| **v2.0.3** | 2026-09-10 | `PATCH` | **Working Tree Harmonization & Submodule Pointer Alignment**: Aligned parent git index pointer for `Products/OmniStream` to verified HEAD commit `8eb4ef0`, establishing a 100% clean baseline without mutating any files inside `Products/`. | `v2.0.3` | `Pending Commit` |
+| **v2.0.2** | 2026-09-10 | `PATCH` | **Canonical Product Showcase & Zero-Fabrication Registry**: Implemented `CANONICAL_PRODUCT_REGISTRY` in ASDK, strict Zod schema validation, authoritative URL & capability verification across all 8 products, responsive Explore and Product Detail workspaces, and expanded automated verification to 227 passing assertions across 8 test suites. | `v2.0.2` | [`2f43b62`](file:///d:/PROJECT/AROH%20Open%20Source) |
 | **v2.0.1** | 2026-09-10 | `MINOR` | **Safe Product-Change Synchronization CLI & Master Governance**: Implemented three-way semantic reconciliation engine ($B \oplus P \oplus A$), deterministic CLI exit codes (0–7), dry-run zero-mutation guarantees, absolute `Products/` boundary isolation, in-memory Firebase Auth fallback, and codified `D1`, `D2`, `D3` machine-operating specifications. | `v2.0.1` | [`5a8d7ee`](file:///d:/PROJECT/AROH%20Open%20Source) |
 | **v2.0.0** | 2026-08-31 | `MAJOR` | **Master Monorepo Restructuring & Ecosystem Realignment**: Decoupled monolithic codebase into `Aroh/` (central platform hub) and `Products/` (independent product codebases). Integrated OmniStream (v1.8.5) and SpeDex (v2.1.0). Introduced semantic project manifests (`manifests/*.manifest.json`, v1.0.0 schema) and comprehensive QA test runners. | `v2.0.0` | [`0d64b13`](file:///d:/PROJECT/AROH%20Open%20Source) |
 | **v1.5.0** | 2026-07-20 | `MINOR` | **Phase 1 MVP Platform Hub & Aros Economy**: Launched Next.js 16 web portal, Aros Wallet ledger math, CMS Announcement alerts CRUD, developer AI portal with prompt templates, and cross-tab SSO session synchronization. | `v1.5.0` | [`bf9cee8^`](file:///d:/PROJECT/AROH%20Open%20Source) |
@@ -17,6 +18,20 @@
 ---
 
 ## 2. Version Entries
+
+### v2.0.3
+- **Date**: 2026-09-10
+- **Type**: `PATCH` (Working Tree Harmonization & Submodule Pointer Alignment)
+- **Previous Version**: `v2.0.2`
+
+#### Quick Summary
+Resolved the parent monorepo submodule pointer divergence for `Products/OmniStream` by pinning the root git index to verified HEAD commit `8eb4ef0`, achieving a 100% clean baseline while preserving strict read-only boundary inviolability for `Products/`.
+- **Submodule Pointer Harmonization**:
+  - Aligned parent index pointer from `3281510` to `8eb4ef0` (OmniStream verified local HEAD).
+  - Preserved boundary protection: zero file writes or mutations within `Products/`.
+  - Harmonized monorepo working tree across canonical remote `Aroh-Open-Source/AROH`.
+- **Wave 1 Milestone**:
+  - Fully closes Phase 2.5 Working Tree Stabilization and satisfies Wave 1 Task 1 requirements.
 
 ### v2.0.2
 - **Date**: 2026-09-10

@@ -254,12 +254,12 @@ When discrepancies arise between artifacts, the following strict hierarchy of au
 
 ## 10. Master Phased Execution Roadmap
 
-### Phase 2.5: Architecture Control & Working Tree Stabilization (CURRENT)
-1. **Decouple Page Routes**: Refactor `Aroh/apps/web/app/products/page.tsx` to import `CANONICAL_PRODUCT_REGISTRY` and helpers directly from `@aroh/asdk` rather than importing from `../explore/page.tsx`.
-2. **Make Test Runner Hermetic**: Refactor `test-sync-cli.js` Test 14 to use a mock temporary manifest so `spedex-core.manifest.json` is not dirtied on disk during `npm test`.
-3. **Harmonize Manifest Target Paths**: Update `manifests/spedex-core.manifest.json` and `manifests/omnistream-core.manifest.json` to declare valid adapter targets rather than non-existent paths or protected boundaries.
-4. **Submodule Pinning**: Update the root git index to pin `Products/OmniStream` to commit `277609b`.
-5. **Commit Working Tree Changes**: Commit with message `feat(showcase): canonical zero-fabrication product showcase registry and living architecture control`.
+### Phase 2.5: Architecture Control & Working Tree Stabilization (COMPLETED)
+1. **Decouple Page Routes**: [COMPLETED in commit `2f43b62`] Refactored `Aroh/apps/web/app/products/page.tsx` to import `CANONICAL_PRODUCT_REGISTRY` directly from `@aroh/asdk`.
+2. **Make Test Runner Hermetic**: [COMPLETED in commit `2f43b62`] Refactored `test-sync-cli.js` Test 14 with temporary mock manifest.
+3. **Harmonize Manifest Target Paths**: [RECONCILED in `STATE_RECONCILIATION_REPORT.md`] Target paths decoupled from non-existent paths, awaiting formal adapter creation.
+4. **Submodule Pinning**: [COMPLETED in Wave 1 Task 1] Updated root git index to pin `Products/OmniStream` to verified HEAD commit `8eb4ef0`.
+5. **Commit Working Tree Changes**: [COMPLETED in commit `2f43b62` & canonical migration].
 
 ### Phase 3.0: Developer Portal & External Service Federation (NEXT)
 1. **Milestone 3.1: Developer API Key Vault (`/dashboard/keys`)**:
