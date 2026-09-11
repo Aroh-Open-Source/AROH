@@ -1,11 +1,60 @@
+# AROH Platform Search Engine & AI Crawler Directives
+# Canonical Host: https://aroh-os.vercel.app
+
 User-agent: *
 Allow: /
-Allow: /explore
-Allow: /ai
-
+Allow: /llms.txt
+Allow: /llms-full.txt
 Disallow: /dashboard
 Disallow: /admin
 Disallow: /cms
 Disallow: /api/
 
+# AI Search & Indexing Agents
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /cms
+Disallow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /cms
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /cms
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /cms
+Disallow: /api/
+
+User-agent: Applebot-Extended
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /cms
+Disallow: /api/
+
+# Canonical Sitemap Declaration
 Sitemap: https://aroh-os.vercel.app/sitemap.xml

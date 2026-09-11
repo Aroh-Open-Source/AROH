@@ -1,0 +1,79 @@
+# AROH Platform
+> A premium unified digital ecosystem platform and open-source foundation connecting specialized digital applications with shared infrastructure, design tokens, identity, Aros ledger economy, and DPDP Act 2023 data-protection compliance.
+
+## Overview
+AROH is an open-source monorepo ecosystem platform designed to unite autonomous, specialized digital products under a shared architectural foundation. Rather than building isolated applications, AROH provides:
+- **Central Platform Hub (`Aroh/`)**: Next.js 16 web portal, unified header, command palette, universal footer, cookie banner, and public discovery portals.
+- **Platform SDK (`@aroh/asdk`)**: Shared TypeScript contracts, canonical product registry, in-memory auth fallback, token services, and DPDP privacy/consent engines.
+- **Design System (`@aroh/ads`)**: Design tokens, typography variables (Outfit font), elevation styles, and motion language (Rise, Elevate, Flow, Expand, Illuminate).
+- **Independent Spoke Products (`Products/`)**: Decoupled, autonomous applications (media streaming, logistics, planetary intelligence, developer tools) connected via explicit adapter contracts.
+
+## Authoritative Endpoints
+- Canonical Web Deployment: https://aroh-os.vercel.app
+- Canonical Source Repository: https://github.com/Aroh-Open-Source/AROH
+- Canonical Branch: `main`
+- Full LLM Context Document: https://aroh-os.vercel.app/llms-full.txt
+
+## Key Public Routes
+- [Homepage](https://aroh-os.vercel.app/): Ecosystem hero, product highlights, and platform entry points.
+- [Explore Products](https://aroh-os.vercel.app/explore): Interactive exploration catalog with capability filters.
+- [Products Directory](https://aroh-os.vercel.app/products): Split-screen products launcher and verified directory.
+- [Developer AI Studio](https://aroh-os.vercel.app/ai): Multi-provider AI orchestrator and stateless prompt workspace.
+- [Terms of Service](https://aroh-os.vercel.app/terms): Platform usage terms and governance agreements.
+- [Acceptable Use Policy](https://aroh-os.vercel.app/acceptable-use): Standards for acceptable ecosystem behavior.
+- [Privacy Notice](https://aroh-os.vercel.app/privacy): Itemized statutory notice under DPDP Act 2023 Section 5.
+- [Cookie Preferences & Policy](https://aroh-os.vercel.app/cookies): Detailed cookie inventory and granular preference controls.
+- [Data Principal Rights Portal](https://aroh-os.vercel.app/privacy/rights): Chapter III statutory rights workflow (Access, Correction, Erasure, Nomination).
+- [Grievance Redressal](https://aroh-os.vercel.app/privacy/grievance): Section 13 grievance submission and tracking portal.
+- [Data Retention Schedule](https://aroh-os.vercel.app/privacy/retention): Purpose-specific data retention horizons and auto-deletion protocols.
+- [AI Privacy Notice](https://aroh-os.vercel.app/privacy/ai): Stateless execution guarantee (zero customer data used for model training).
+- [Security Safeguards](https://aroh-os.vercel.app/privacy/security): Encryption standards and 9-stage incident response framework.
+
+## Registered Ecosystem Products
+All products are verified from canonical source repositories and live deployments:
+
+- **OmniStream** (`/explore/omnistream`): Personal media experience platform uniting ad-free video discovery (U-TUBE) with cinematic fixed-aperture theater (CineMorph) and browser-native edge intelligence (OMS).
+  - Version: v1.8.5
+  - Live: https://0mnistream.vercel.app/
+  - Repo: https://github.com/UdayPatnala/OmniStream
+
+- **SpeDex** (`/explore/spedex`): Intelligent courier delivery and logistics platform featuring real-time package tracking, multi-stop route optimization, and driver telemetry.
+  - Version: v2.1.0
+  - Live: https://spedex.vercel.app/
+  - Repo: https://github.com/UdayPatnala/SpeDex
+
+- **Nebula** (`/explore/nebula`): Planetary intelligence dashboard delivering live telemetry from Earth and space (ISS orbital tracking, seismic events, orbital rocket countdowns, NASA imagery).
+  - Version: v1.4.2
+  - Live: https://nebula-tau-nine.vercel.app/
+  - Repo: https://github.com/UdayPatnala/nebula
+
+- **Music Mirror** (`/explore/music-mirror`): Spotify playback synchronization engine featuring real-time audio analysis, dynamic visualizers, and lyric tracking.
+  - Version: v1.2.0
+  - Live: https://music-mirror.vercel.app/
+  - Repo: https://github.com/UdayPatnala/Music-Mirror
+
+- **JavaPath Pro** (`/explore/javapath-pro`): Interactive Java learning and JVM engineering platform with in-browser coding playgrounds and structured certification tracks.
+  - Version: v1.1.0
+  - Live: https://javapath-pro.vercel.app/
+  - Repo: https://github.com/UdayPatnala/javapath-pro
+
+- **Aros Wallet & Ledger Engine** (`/explore/aros-wallet`): Internal platform utility credits economy supporting secure balance transfers and membership tiers.
+  - Category: Platform Utility
+  - Status: Internal Core Service
+
+- **AROH CMS Alerts Engine** (`/explore/aroh-cms`): Scheduled ecosystem announcements, push notifications, and markdown broadcast management.
+  - Category: Platform Utility
+  - Status: Internal Core Service
+
+- **Aros Metrics Engine** (`/explore/aros-metrics`): Real-time operational telemetry, ledger performance charts, and distributed session monitoring.
+  - Category: Platform Utility
+  - Status: Internal Core Service
+
+## Governance & Privacy Compliance
+AROH is engineered to support compliance with the Digital Personal Data Protection Act, 2023 (DPDP Act) and the Digital Personal Data Protection Rules, 2025:
+- Clear affirmative consent standards (DPDP Act Section 6).
+- 1-click consent withdrawal parity (DPDP Act Section 6(4)).
+- Dedicated Data Principal Rights submission workflows (DPDP Act Chapter III).
+- Timed grievance redressal with statutory tracking (DPDP Act Section 13).
+- Strict purpose-based retention and cascading account erasure (DPDP Act Sections 8(7) & 12).
+- Zero fabrication: Legal entities and designated officers use standard placeholders pending external legal review (`LEGAL_REVIEW_REQUIRED`).

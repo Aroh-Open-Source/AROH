@@ -1,0 +1,71 @@
+# AROH Platform — Extended Technical Architecture for AI & LLM Systems
+> Authoritative, comprehensive architectural dossier for AI agents, crawlers, and LLM reasoning engines interacting with the AROH Open Source Platform.
+
+## 1. System Topology & Core Boundaries
+
+```
+AROH Open Source Monorepo
+├── Aroh/                       # Central Platform Hub & Foundation
+│   ├── apps/
+│   │   └── web/                # Next.js 16 (App Router) Web Application
+│   ├── packages/
+│   │   ├── ads/                # @aroh/ads Design Tokens & Typography
+│   │   └── asdk/               # @aroh/asdk Shared Platform SDK & Contracts
+│   ├── manifests/              # Semantic Monorepo Synchronization Manifests
+│   ├── scripts/                # Automated QA & Audit Test Runners
+│   └── docs/                   # Architecture, Governance, Legal & Privacy Suite
+│       ├── architecture/       # Living architecture intelligence & handoffs
+│       ├── legal/              # Terms of Service, Acceptable Use, IP, Community
+│       └── privacy/            # DPDP Act 2023 & DPDP Rules 2025 Notice Suite
+└── Products/                   # Inviolable Independent Spoke Products
+    ├── OmniStream/             # Git submodule (e3e7643) - Personal Media Platform
+    └── Spedex/                 # Logistics & Delivery Platform
+```
+
+### Absolute Boundary Invariants
+1. **`Products/` Directory Inviolability**: `Products/` contains independent git submodules and product trees. No parent platform script, refactor, or global cleanup may mutate files within `Products/`.
+2. **Spoke Adapter Decoupling**: All integration between AROH and products occurs through `@aroh/asdk/adapters` contracts without modifying spoke internals.
+3. **Zero-Fabrication Standard**: Product metadata, capabilities, URLs, versions, and legal representations must be verified against authoritative git repositories or official deployments.
+
+## 2. Canonical Product Registry (`@aroh/asdk`)
+
+The platform SDK maintains a strictly validated registry of connected products (`ProductShowcaseSchema`):
+
+| Product ID | Display Name | Category | Version | Primary Capabilities | Live URL | Repository |
+|---|---|---|---|---|---|---|
+| `omnistream` | OmniStream | Media & Streaming | v1.8.5 | U-Tube Discovery, CineMorph Theater, OMS Client CV/DSP Engine | https://0mnistream.vercel.app/ | https://github.com/UdayPatnala/OmniStream |
+| `spedex` | SpeDex | Courier & Logistics | v2.1.0 | Real-time tracking, Route optimization, Telemetry | https://spedex.vercel.app/ | https://github.com/UdayPatnala/SpeDex |
+| `nebula` | Nebula | Space & Telemetry | v1.4.2 | Live ISS tracking, Seismic events, Rocket launches, NASA APOD | https://nebula-tau-nine.vercel.app/ | https://github.com/UdayPatnala/nebula |
+| `music-mirror` | Music Mirror | Audio & Music | v1.2.0 | Spotify playback sync, Audio visualizer, Lyric tracking | https://music-mirror.vercel.app/ | https://github.com/UdayPatnala/Music-Mirror |
+| `javapath-pro` | JavaPath Pro | Developer Education | v1.1.0 | Interactive JVM playgrounds, Coding challenges, Certification | https://javapath-pro.vercel.app/ | https://github.com/UdayPatnala/javapath-pro |
+| `aros-wallet` | Aros Wallet | Platform Utility | v1.0.0 | Digital credit ledger, Transaction math, Membership tiers | https://aroh-os.vercel.app/explore/aros-wallet | Internal AROH Core |
+| `aroh-cms` | AROH CMS | Platform Utility | v1.0.0 | Scheduled announcements, Alert feeds, Markdown CMS | https://aroh-os.vercel.app/explore/aroh-cms | Internal AROH Core |
+| `aros-metrics` | Aros Metrics | Platform Utility | v1.0.0 | Telemetry graphs, Ledger velocity, Active session monitoring | https://aroh-os.vercel.app/explore/aros-metrics | Internal AROH Core |
+
+## 3. Data Protection, Privacy & DPDP Architecture
+
+AROH implements a comprehensive compliance layer designed for the Digital Personal Data Protection Act, 2023 (DPDP Act) and the Digital Personal Data Protection Rules, 2025:
+- **Statutory Privacy Notice (Section 5)**: Itemized disclosures covering identity, data categories, processing grounds, recipients, and cross-border mechanisms at `/privacy`.
+- **Granular Affirmative Consent (Section 6)**:
+  - Technical engine in `@aroh/asdk/privacy/consent`.
+  - Distinguishes essential cookies (`aroh_session`, `aroh_consent_state`, `aroh_active_theme`) from optional cookies (`aroh_analytics`, `aroh_user_preferences`).
+  - Pre-consent blocking prevents analytics or functional scripts from loading prior to affirmative acceptance.
+  - 1-click withdrawal parity at `/privacy/consent` and through the persistent cookie settings drawer.
+- **Data Principal Rights (Chapter III)**:
+  - Automated request handling at `/api/privacy/rights`.
+  - Supports Summary/Access (Section 11), Correction (Section 12(1)), Erasure (Section 12(2)), and Nomination (Section 14).
+- **Grievance Redressal (Section 13)**:
+  - Dedicated submission portal at `/privacy/grievance` and `/api/privacy/grievance`.
+  - Enforces 48-hour acknowledgment and statutory resolution horizons capped at 90 days.
+  - Escalation pathway to the Data Protection Board of India (DPBI) prominently documented.
+- **Data Portability & Erasure**:
+  - Authenticated JSON export bundle streaming via `/api/privacy/export`.
+  - Cascading deletion across sessions, profiles, and spoke services via `/api/privacy/delete-account`.
+- **AI Processing Guardrails**:
+  - Stateless execution guarantee: User prompts and workspace inputs are never retained for model retraining (`/privacy/ai`).
+
+## 4. Crawling & AI Discovery Configuration
+- Sitemap: `https://aroh-os.vercel.app/sitemap.xml`
+- Robots: `https://aroh-os.vercel.app/robots.txt`
+- Canonical Base URL: `https://aroh-os.vercel.app`
+- Direct LLM Specification: `https://aroh-os.vercel.app/llms.txt`

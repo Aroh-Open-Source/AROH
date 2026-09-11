@@ -11,7 +11,7 @@
     "build": "npm run build --workspace=@aroh/web",
     "start": "npm run start --workspace=@aroh/web",
 
-    "test": "npm run test:manifests && npm run test:ai && npm run test:sdk && npm run test:session && npm run test:packages && npm run test:sync && npm run test:registry && npm run test:privacy",
+    "test": "npm run test:manifests && npm run test:ai && npm run test:sdk && npm run test:session && npm run test:packages && npm run test:sync && npm run test:registry && npm run test:privacy && npm run test:seo",
     "test:manifests": "tsx scripts/verify-sync-manifests.js",
     "test:ai": "tsx scripts/test-ai-abstraction.js",
     "test:sdk": "tsx scripts/test-sdk.js",
@@ -20,6 +20,7 @@
     "test:sync": "tsx scripts/test-sync-cli.js",
     "test:registry": "tsx scripts/test-product-registry.js",
     "test:privacy": "node scripts/test-privacy-static-audit.js",
+    "test:seo": "node scripts/test-seo-audit.js",
     "test:e2e": "node scripts/e2e-audit.js",
 
     "sync": "tsx scripts/aroh-sync.js",
