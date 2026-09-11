@@ -1,0 +1,92 @@
+{
+  "title": "AROH Legal & Regulatory Review Register",
+  "version": "1.0.0",
+  "last_updated": "2026-09-11T12:00:00Z",
+  "governing_statutes": [
+    "Digital Personal Data Protection Act, 2023 (DPDP Act)",
+    "Digital Personal Data Protection Rules, 2025",
+    "Information Technology Act, 2000 & applicable intermediary guidelines"
+  ],
+  "items": [
+    {
+      "item": "LR-001-FIDUCIARY-IDENTITY",
+      "decision_required": "Formal legal entity name, corporate identification (CIN/LLPIN), and registered office address for Data Fiduciary declaration under Section 5 notice requirements",
+      "current_assumption": "Placeholder identifier '[AROH_LEGAL_ENTITY_NAME]' utilized; entity in formation or operating under founder sponsorship",
+      "source": "Aroh/docs/privacy/PRIVACY_NOTICE.md",
+      "risk": "Statutory notice invalidity if registered corporate entity details are omitted prior to commercial production processing",
+      "owner": "Founder / Corporate Legal Counsel",
+      "status": "LEGAL_REVIEW_REQUIRED",
+      "required_legal_confirmation": "Confirm official company incorporation details, registered address, and official corporate registration numbers"
+    },
+    {
+      "item": "LR-002-GRIEVANCE-OFFICER-APPOINTMENT",
+      "decision_required": "Designation, contact email, and escalation mechanism of the statutory Grievance Redressal Officer under Section 13 DPDP Act and Rule 14 DPDP Rules 2025",
+      "current_assumption": "Configurable contact 'grievance@aroh.in' and placeholder '[GRIEVANCE_OFFICER_NAME]'; response SLA configured to 30 days (well within 90-day statutory maximum)",
+      "source": "Aroh/docs/privacy/GRIEVANCE_REDRESSAL_POLICY.md",
+      "risk": "Regulatory penalties under DPDP Act Schedule for failure to establish operational grievance redressal mechanism",
+      "owner": "Compliance Officer / Legal Counsel",
+      "status": "LEGAL_REVIEW_REQUIRED",
+      "required_legal_confirmation": "Officially designate employee or legal representative as statutory Grievance Officer and verify public contact channels"
+    },
+    {
+      "item": "LR-003-SIGNIFICANT-DATA-FIDUCIARY-STATUS",
+      "decision_required": "Assessment of whether AROH qualifies as a 'Significant Data Fiduciary' (SDF) under Section 10 DPDP Act (based on volume/sensitivity of data, risk to electoral democracy, sovereignty, or public order)",
+      "current_assumption": "AROH is an open-source application ecosystem with modest initial volume; does NOT currently meet criteria for SDF designation, hence independent Data Protection Officer (DPO) and Data Protection Impact Assessments (DPIA) are treated as FUTURE_READY rather than mandatory now",
+      "source": "Aroh/docs/privacy/DATA_PROCESSING_REGISTER.json",
+      "risk": "Non-compliance with SDF obligations (mandatory local DPO, periodic DPIA, statutory audit) if designated by Central Government",
+      "owner": "Legal Counsel",
+      "status": "LEGAL_REVIEW_REQUIRED",
+      "required_legal_confirmation": "Confirm non-SDF status under current user volume and establish trigger thresholds for future re-evaluation"
+    },
+    {
+      "item": "LR-004-CHILD-PROCESSING-CONSENT-MODEL",
+      "decision_required": "Verification mechanism for parental consent regarding users under 18 years of age pursuant to Section 9 DPDP Act and DPDP Rules 2025",
+      "current_assumption": "Platform is primarily intended for general audience, developers, and adult professionals (18+); minors under 18 are prohibited from autonomous account creation without verifiable parental authorization; zero behavioral tracking or targeted advertising across entire platform",
+      "source": "Aroh/docs/privacy/CHILD_AND_MINOR_PRIVACY_POLICY.md",
+      "risk": "Strict statutory liability for processing child data without verifiable parental consent or performing prohibited tracking",
+      "owner": "Product Lead / Legal Counsel",
+      "status": "LEGAL_REVIEW_REQUIRED",
+      "required_legal_confirmation": "Confirm age assurance approach and acceptable methods of verifying parental authority under final notified rules"
+    },
+    {
+      "item": "LR-005-INTERNATIONAL-TRANSFERS",
+      "decision_required": "Legality of international data transfers to Google Cloud Platform (GCP) / Firebase and Vercel infrastructure located outside India",
+      "current_assumption": "Section 16 DPDP Act permits cross-border transfer unless restricted by Central Government negative list ('blacklisting' approach); Central Government has not notified restrictive countries prohibiting transfers to US/EU for standard hosting; data processing addenda executed with cloud vendors",
+      "source": "Aroh/docs/privacy/DATA_TRANSFER_DISCLOSURE.md",
+      "risk": "Transfer violation if Central Government issues restricted country notifications impacting US cloud data centers",
+      "owner": "Infrastructure & Legal Counsel",
+      "status": "LEGAL_REVIEW_REQUIRED",
+      "required_legal_confirmation": "Monitor Gazette notifications under Section 16(1) and verify cloud vendor localization capabilities if required"
+    },
+    {
+      "item": "LR-006-AROS-TOKEN-LEGAL-CHARACTERIZATION",
+      "decision_required": "Legal classification of Aros tokens (in-platform utility credits vs. stored value vs. virtual digital assets under Indian tax / RBI guidelines)",
+      "current_assumption": "Aros tokens are closed-loop, non-transferable, non-cashable in-platform utility reward points used solely for membership unlocks and platform feature access; no peer-to-peer trading or fiat redemption",
+      "source": "Aroh/docs/architecture/AROH_LIVING_ARCHITECTURE_INTELLIGENCE.md",
+      "risk": "Unintended regulatory scrutiny under RBI Prepaid Payment Instrument (PPI) or VDA tax regulations if secondary market develops",
+      "owner": "Financial Legal Counsel",
+      "status": "LEGAL_REVIEW_REQUIRED",
+      "required_legal_confirmation": "Confirm closed-loop utility exemption and validate Terms of Service prohibition on commercial resale or monetary cashout"
+    },
+    {
+      "item": "LR-007-AI-DATA-TRAINING-DISCLOSURE",
+      "decision_required": "Confirming terms of service with third-party LLM providers (OpenAI / Anthropic / Google) regarding whether user prompts are utilized for model training",
+      "current_assumption": "Only commercial API endpoints are utilized which explicitly guarantee zero data retention for training; default development environment uses local mock orchestrator",
+      "source": "Aroh/docs/privacy/AI_PRIVACY_NOTICE.md",
+      "risk": "Misrepresentation to Data Principals if consumer-grade LLM interfaces with training retention are accidentally configured",
+      "owner": "AI Engineering Lead",
+      "status": "LEGAL_REVIEW_REQUIRED",
+      "required_legal_confirmation": "Audit commercial API agreements to certify zero-training retention across all configured model providers"
+    },
+    {
+      "item": "LR-008-TERMS-LIMITATION-OF-LIABILITY",
+      "decision_required": "Enforceability of liability limitations, disclaimer of warranties, and indemnification clauses under Indian Contract Act, 1872 and Consumer Protection Act, 2019",
+      "current_assumption": "Standard SaaS liability cap (limited to amounts paid in preceding 12 months or INR 1,000); explicit non-waiver of non-excludable statutory privacy rights under DPDP Act",
+      "source": "Aroh/docs/legal/TERMS_OF_SERVICE.md",
+      "risk": "Unenforceability of liability caps in consumer dispute tribunals",
+      "owner": "Litigation & Commercial Counsel",
+      "status": "LEGAL_REVIEW_REQUIRED",
+      "required_legal_confirmation": "Review clause enforceability against recent Indian consumer protection jurisprudence"
+    }
+  ]
+}

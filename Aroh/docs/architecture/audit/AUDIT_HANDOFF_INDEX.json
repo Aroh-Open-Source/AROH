@@ -364,6 +364,20 @@
         "WAVE1-FINAL",
         "GATE-W1"
       ]
+    },
+    {
+      "stage_id": "STAGE-PRIVACY-DPDP",
+      "num": "PRIVACY",
+      "name": "AROH Privacy, Consent, Legal Terms, Cookies & DPDP Compliance Implementation",
+      "status": "COMPLETED",
+      "handoff_path": "PRIVACY_COMPLIANCE_IMPLEMENTATION_HANDOFF.md",
+      "artifact": "PRIVACY_COMPLIANCE_IMPLEMENTATION_HANDOFF",
+      "handoff_status": "PRIVACY_IMPLEMENTATION_COMPLETE_PENDING_LEGAL_REVIEW",
+      "stable_ids": [
+        "DPDP-ACT-2023",
+        "DPDP-RULES-2025",
+        "AUDIT-HANDOFF-PRIVACY-COMPLIANCE-DPDP-V1.0"
+      ]
     }
   ]
 }

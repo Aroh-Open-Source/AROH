@@ -4,6 +4,8 @@ import "./globals.css";
 import CommandPalette from "./components/command-palette";
 import SessionSync from "./components/session-sync";
 import GlassDock from "./components/dock";
+import CookieBanner from "./components/cookie-banner";
+import PlatformFooter from "./components/footer";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -36,7 +38,9 @@ export default function RootLayout({
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(2,132,199,0.03)_0%,transparent_60%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.015)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
         </div>
-        {children}
+        <main className="flex-1">{children}</main>
+        <PlatformFooter />
+        <CookieBanner />
         <CommandPalette />
         <SessionSync />
         <GlassDock />

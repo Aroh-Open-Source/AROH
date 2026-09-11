@@ -8,6 +8,7 @@
 
 | Version | Date | Type | Quick Summary | Git Tag | Commit |
 |---|---|:---:|---|:---:|:---:|
+| **v2.1.0** | 2026-09-11 | `MINOR` | **AROH Privacy, Consent, Legal Terms, Cookies & DPDP Compliance**: Implemented full privacy & compliance architecture under DPDP Act 2023 & DPDP Rules 2025. Codified 20 master legal/privacy documents, 4 machine-readable registers, ASDK consent & rights engine, universal cookie banner & footer, 10 public routes, 5 API routes, and expanded test suite to 367 passing assertions. | `v2.1.0` | [`HEAD`](file:///d:/PROJECT/AROH%20Open%20Source) |
 | **v2.0.5** | 2026-09-10 | `PATCH` | **Wave 1 Execution & Baseline Harmonization**: Audited all 5 project manifests for decoupled target path policy compliance (Task 3), aligned OmniStream submodule pointer to upstream HEAD `e3e7643` (Task 4), and finalized canonical Wave 1 execution plan. | `v2.0.5` | [`ee50af8`](file:///d:/PROJECT/AROH%20Open%20Source) |
 | **v2.0.4** | 2026-09-10 | `MINOR` | **Spoke Adapter Interface Contract Specification**: Defined canonical adapter contract in `@aroh/asdk/adapters`, 7-level provenance verification taxonomy, fail-closed `Products/` boundary protection, and expanded test suite to 239 assertions. | `v2.0.4` | [`2f740f7`](file:///d:/PROJECT/AROH%20Open%20Source) |
 | **v2.0.3** | 2026-09-10 | `PATCH` | **Working Tree Harmonization & Submodule Pointer Alignment**: Aligned parent git index pointer for `Products/OmniStream` to verified HEAD commit `8eb4ef0`, establishing a 100% clean baseline without mutating any files inside `Products/`. | `v2.0.3` | [`8ce4df0`](file:///d:/PROJECT/AROH%20Open%20Source) |
@@ -20,6 +21,35 @@
 ---
 
 ## 2. Version Entries
+
+### v2.1.0
+- **Date**: 2026-09-11
+- **Type**: `MINOR` (Privacy, Consent, Legal Terms, Cookies & DPDP Compliance Implementation)
+- **Previous Version**: `v2.0.5`
+
+#### Quick Summary
+Implemented a comprehensive, system-level privacy and legal compliance framework aligned with the **Digital Personal Data Protection Act, 2023 (DPDP Act)** and **Digital Personal Data Protection Rules, 2025** ahead of mandatory phased commencement dates.
+- **Legal Document Suite (20 Documents under `Aroh/docs/legal/` & `Aroh/docs/privacy/`)**:
+  - Authored Terms of Service, Acceptable Use Policy, Intellectual Property Policy, Community Content Policy, and Legal Document Version History.
+  - Authored standalone Privacy Notice (Section 5 itemized), Consent Policy (Section 6 standards), Cookie Policy, Cookie Preference Policy, Data Principal Rights Policy, Grievance Redressal Policy, Data Retention & Deletion Policy, Security & Incident Response Policy (9-stage workflow), AI Privacy Notice (stateless zero-training guarantee), Third-Party Processors Disclosure, Data Transfer Disclosure (Section 16 cross-border), Child & Minor Privacy Policy (18+ assurance), Account Deletion Policy, Data Export Policy, and Law Enforcement Policy.
+- **Machine-Readable Privacy Registers**:
+  - `DATA_PROCESSING_REGISTER.json` (7 data categories documenting 24 governance dimensions).
+  - `COOKIE_INVENTORY.json` (5 itemized cookies with classification and pre-consent behavior).
+  - `DATA_PROCESSORS.json` (Verified infrastructure partners Google Cloud, Vercel, and AI providers).
+  - `LEGAL_REVIEW_REGISTER.json` & `.md` (8 high-priority legal review items tracked under `LEGAL_REVIEW_REQUIRED`).
+- **ASDK Technical Privacy Engine (`packages/asdk/src/privacy/`)**:
+  - `consent.ts`: `ConsentStateSchema` (`unknown`, `accepted`, `rejected`, `partial`, `withdrawn`), `CookieCategorySchema`, `isCategoryAllowed()`, `ConsentRecordSchema`, cookie serialization/parsing.
+  - `rights.ts`: `DataPrincipalRightTypeSchema`, `DataPrincipalRequestSchema`, `GrievanceTicketSchema` (statutory 90-day cap), `calculateStatutoryDeadline()`.
+  - `account-lifecycle.ts`: `AROH_DELETION_CASCADE_SCHEDULE`, `DataExportBundleSchema`.
+- **Web UI & Components (`apps/web/`)**:
+  - `CookieBanner.tsx`: Accessible banner with Accept All, Reject Optional, and Granular Preference Drawer.
+  - `PlatformFooter.tsx`: Universal footer with links to all legal, privacy, cookie, rights, and grievance portals.
+  - 10 Public Routes: `/privacy`, `/terms`, `/cookies`, `/acceptable-use`, `/privacy/consent`, `/privacy/rights`, `/privacy/grievance`, `/privacy/security`, `/privacy/retention`, `/privacy/ai`.
+  - 5 API Routes: `/api/privacy/consent`, `/api/privacy/rights`, `/api/privacy/grievance`, `/api/privacy/export`, `/api/privacy/delete-account`.
+- **Automated Verification & Zero-Mutation Boundary**:
+  - Expanded test suite from 239 to **367 passing assertions** across 9 test suites.
+  - Next.js production build passing cleanly across all 30 routes.
+  - `Products/` directory 100% untouched and verified clean.
 
 ### v2.0.5
 - **Date**: 2026-09-10

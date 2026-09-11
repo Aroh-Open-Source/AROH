@@ -57,7 +57,7 @@ export default function HomePage() {
 
       {/* Main Ultra-Clean Light Platform Layout */}
       <div className="min-h-screen bg-[#fbfbfa] text-slate-900 flex flex-col justify-between overflow-x-hidden font-sans bg-mesh-light relative">
-        
+
         {/* Ambient 3D Organic Rock & Orb Elements matching official AROH logo artwork */}
         <div className="absolute top-24 left-8 md:left-24 pointer-events-none opacity-80 z-0">
           <motion.div
@@ -174,7 +174,7 @@ export default function HomePage() {
 
         {/* Ultra-Clean Light Landing Page Hero with Ambient Logo Rock/Sphere Art */}
         <main className="flex-1 max-w-4xl w-full mx-auto px-6 py-16 pb-28 space-y-16 relative z-10">
-          
+
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
@@ -273,19 +273,6 @@ export default function HomePage() {
             )}
           </div>
         </main>
-
-        {/* Clean Footer */}
-        <footer className="border-t border-black/5 px-6 py-8 relative z-10 text-center bg-white">
-          <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-2">
-              <ArohLogo size={22} />
-              <span className="font-extrabold text-sm text-slate-900 tracking-widest">AROH PLATFORM</span>
-            </div>
-            <p className="text-xs text-slate-500">
-              © {new Date().getFullYear()} AROH Ecosystem. All rights reserved.
-            </p>
-          </div>
-        </footer>
       </div>
     </>
   );

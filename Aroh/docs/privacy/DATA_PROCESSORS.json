@@ -1,0 +1,50 @@
+{
+  "title": "AROH Third-Party Data Processors & Subprocessors Disclosure",
+  "version": "1.0.0",
+  "last_updated": "2026-09-11T12:00:00Z",
+  "legal_review_status": "LEGAL_REVIEW_REQUIRED",
+  "processors": [
+    {
+      "processor": "Google Cloud Platform / Firebase (Google LLC)",
+      "service": "Firebase Authentication & Cloud Firestore",
+      "purpose": "User identity authentication, security authorization, and persistence of profiles, wallets, and CMS records",
+      "data_categories": ["email", "password_hash", "user_profile", "wallet_balance", "transaction_ledger"],
+      "location": "Global / Multi-Region Infrastructure (US / Asia-South1 Mumbai where configured)",
+      "international_transfer": "Applicable; transfer subject to standard contractual clauses and Central Government transfer rules under Sec 16 DPDP Act",
+      "security_controls": "SOC 1/2/3, ISO 27001, ISO 27017, ISO 27018, TLS 1.3 in-transit, AES-256 at-rest",
+      "contract_status": "Data Processing Addendum (DPA) under Google Cloud Terms of Service",
+      "subprocessor_policy": "Google maintains public list of verified infrastructure subprocessors",
+      "deletion_requirement": "Immediate document deletion via Admin SDK; backups purged within 180 days",
+      "verified_at": "2026-09-11",
+      "source": "Aroh/packages/asdk/src/services/firebase.ts"
+    },
+    {
+      "processor": "Vercel Inc.",
+      "service": "Edge Network, Next.js Hosting & Serverless Functions",
+      "purpose": "Application routing, static asset distribution, edge middleware, and server route execution",
+      "data_categories": ["ip_address", "request_headers", "user_agent", "edge_telemetry_logs"],
+      "location": "Global Edge CDN PoPs (India / US / Europe)",
+      "international_transfer": "Applicable; edge request delivery",
+      "security_controls": "SOC 2 Type II, ISO 27001, DDoS mitigation, TLS 1.3 termination",
+      "contract_status": "Vercel Data Processing Addendum (DPA)",
+      "subprocessor_policy": "Vercel approved subprocessors including AWS and Cloudflare",
+      "deletion_requirement": "Edge logs rotated and expired within 30 days",
+      "verified_at": "2026-09-11",
+      "source": "Vercel project deployment configuration"
+    },
+    {
+      "processor": "Third-Party AI Inference Providers (OpenAI / Anthropic / Google Gemini)",
+      "service": "LLM Inference API (When enabled by developer configuration)",
+      "purpose": "Stateless conversational and code reasoning in AI Developer Portal",
+      "data_categories": ["user_prompts", "session_context_tokens", "model_outputs"],
+      "location": "United States / European Union Data Centers",
+      "international_transfer": "Applicable; prompt data transmitted abroad for model inference",
+      "security_controls": "SOC 2 Type II, TLS 1.3 in-transit, zero-data-retention agreements for API tiers",
+      "contract_status": "Commercial API Enterprise Terms / Subject to individual provider DPA; currently MockProvider default in repository",
+      "subprocessor_policy": "Subject to designated AI provider policies",
+      "deletion_requirement": "Zero data retention for training on commercial API endpoints",
+      "verified_at": "2026-09-11",
+      "source": "Aroh/packages/asdk/src/ai/provider.ts"
+    }
+  ]
+}

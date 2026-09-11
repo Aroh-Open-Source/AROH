@@ -1,0 +1,83 @@
+{
+  "title": "AROH Platform Cookie & Storage Inventory",
+  "version": "1.0.0",
+  "last_updated": "2026-09-11T12:00:00Z",
+  "legal_review_status": "LEGAL_REVIEW_REQUIRED",
+  "cookies": [
+    {
+      "cookie_name": "aroh_consent_preferences_v1",
+      "provider": "AROH Ecosystem Platform",
+      "category": "essential",
+      "purpose": "Stores user privacy preferences and category consent states to enforce pre-consent blocking and preference persistence",
+      "first_party_or_third_party": "first_party",
+      "duration": "180 days (6 months)",
+      "data_collected": "JSON object encoding consent_state, category flags (functional, analytics, marketing), policy version, and timestamp",
+      "personal_data_possible": false,
+      "consent_required": false,
+      "loaded_before_consent": true,
+      "loaded_after_consent": true,
+      "source_code_location": "Aroh/packages/asdk/src/privacy/consent.ts",
+      "last_verified": "2026-09-11"
+    },
+    {
+      "cookie_name": "aroh_token",
+      "provider": "AROH Ecosystem Platform",
+      "category": "essential",
+      "purpose": "Maintains cryptographic session token for authenticated user identity across platform routes and API requests",
+      "first_party_or_third_party": "first_party",
+      "duration": "Session / 24 hours",
+      "data_collected": "Cryptographic JWT/HMAC token encoding user ID and assigned role",
+      "personal_data_possible": true,
+      "consent_required": false,
+      "loaded_before_consent": false,
+      "loaded_after_consent": true,
+      "source_code_location": "Aroh/packages/asdk/src/services/token.ts",
+      "last_verified": "2026-09-11"
+    },
+    {
+      "cookie_name": "aroh_intro_played",
+      "provider": "AROH Ecosystem Platform",
+      "category": "functional",
+      "purpose": "Session storage flag preventing redundant intro video playback on subsequent page loads",
+      "first_party_or_third_party": "first_party",
+      "duration": "Session only (sessionStorage)",
+      "data_collected": "Boolean flag ('true')",
+      "personal_data_possible": false,
+      "consent_required": true,
+      "loaded_before_consent": false,
+      "loaded_after_consent": true,
+      "source_code_location": "Aroh/apps/web/app/page.tsx",
+      "last_verified": "2026-09-11"
+    },
+    {
+      "cookie_name": "aroh_telemetry_client_id",
+      "provider": "AROH Ecosystem Telemetry (Optional Analytics)",
+      "category": "analytics",
+      "purpose": "Anonymous pseudonymized client identifier for route latency and error-rate monitoring; blocked until explicit analytics consent",
+      "first_party_or_third_party": "first_party",
+      "duration": "90 days",
+      "data_collected": "Pseudorandom UUID, route transition timestamp, client viewport dimensions",
+      "personal_data_possible": false,
+      "consent_required": true,
+      "loaded_before_consent": false,
+      "loaded_after_consent": true,
+      "source_code_location": "Aroh/apps/web/app/components/telemetry.tsx (planned)",
+      "last_verified": "2026-09-11"
+    },
+    {
+      "cookie_name": "aroh_marketing_campaign_ref",
+      "provider": "AROH Partner Showcase (Optional Marketing)",
+      "category": "marketing",
+      "purpose": "Referral tracking token when exploring partner products; blocked until explicit marketing consent",
+      "first_party_or_third_party": "first_party",
+      "duration": "30 days",
+      "data_collected": "Referral source token and campaign ID",
+      "personal_data_possible": false,
+      "consent_required": true,
+      "loaded_before_consent": false,
+      "loaded_after_consent": true,
+      "source_code_location": "Aroh/apps/web/app/explore/page.tsx",
+      "last_verified": "2026-09-11"
+    }
+  ]
+}
