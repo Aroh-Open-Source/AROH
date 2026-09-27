@@ -17,3 +17,5 @@ export * from "./telemetry/index";
 export * from "./version/index";
 export * from "./storage/index";
 export * from "./mobile/index";
+export * from "./services/team-wallet";
+export * from "./services/saml-scim";

@@ -462,7 +462,7 @@ function ArosConsoleWorkspace({ user, profile, wallet, rewardUser, upgradeMember
 /* ==========================================
    6. AROH AI Doc Helper Workspace
    ========================================== */
-import { mockDocDatabase } from "../../ai/page";
+import { mockDocDatabase } from "../../ai/doc-database";
 
 function ArohAiHelperWorkspace() {
   const [query, setQuery] = React.useState("");

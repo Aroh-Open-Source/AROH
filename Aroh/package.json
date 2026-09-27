@@ -17,7 +17,7 @@
     "test:ai": "tsx scripts/test-ai-abstraction.js",
     "test:sdk": "tsx scripts/test-sdk.js",
     "test:session": "tsx scripts/test-session-sync.js",
-    "test:packages": "npm test --prefix packages/ads && npm test --prefix packages/asdk",
+    "test:packages": "npm test --prefix packages/ads && npm test --prefix packages/asdk && npm test --prefix apps/mobile",
     "test:sync": "tsx scripts/test-sync-cli.js",
     "test:registry": "tsx scripts/test-product-registry.js",
     "test:privacy": "node scripts/test-privacy-static-audit.js",

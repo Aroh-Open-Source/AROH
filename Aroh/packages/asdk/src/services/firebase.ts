@@ -30,8 +30,7 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Check if we should run in mock mode
-const isMock = !firebaseConfig.apiKey || process.env.NEXT_PUBLIC_AROH_ENV === "mock" || process.env.AROH_ENV === "mock" || (typeof window !== "undefined" && localStorage.getItem("aroh_force_mock") === "true");
+const isMock = !firebaseConfig.apiKey || process.env.NEXT_PUBLIC_AROH_ENV === "mock" || process.env.AROH_ENV === "mock" || (typeof window !== "undefined" && typeof window.document !== "undefined" && typeof localStorage !== "undefined" && localStorage.getItem("aroh_force_mock") === "true");
 export const isMockEnv = isMock;
 
 // Initialize Firebase App if not mock
@@ -84,10 +83,12 @@ const memoryStore = new Map<string, string>();
 function hasWorkingLocalStorage(): boolean {
   try {
     return (
-      typeof localStorage !== "undefined" &&
-      localStorage !== null &&
-      typeof localStorage.getItem === "function" &&
-      typeof localStorage.setItem === "function"
+      typeof window !== "undefined" &&
+      typeof window.document !== "undefined" &&
+      typeof window.localStorage !== "undefined" &&
+      window.localStorage !== null &&
+      typeof window.localStorage.getItem === "function" &&
+      typeof window.localStorage.setItem === "function"
     );
   } catch {
     return false;
@@ -108,9 +109,9 @@ function getStored<T>(key: string, defaultValue: T): T {
     }
   }
   try {
-    const stored = localStorage.getItem(key);
+    const stored = window.localStorage.getItem(key);
     if (!stored) {
-      localStorage.setItem(key, JSON.stringify(defaultValue));
+      window.localStorage.setItem(key, JSON.stringify(defaultValue));
       return defaultValue;
     }
     return JSON.parse(stored);
@@ -125,7 +126,7 @@ function setStored<T>(key: string, value: T): void {
     return;
   }
   try {
-    localStorage.setItem(key, JSON.stringify(value));
+    window.localStorage.setItem(key, JSON.stringify(value));
   } catch {
     memoryStore.set(key, JSON.stringify(value));
   }

@@ -2,10 +2,9 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { usePlatformStore } from "@aroh/asdk";
+import { usePlatformStore, registeredProducts, launchProductWebpage } from "@aroh/asdk";
 import { AnimatePresence, motion } from "framer-motion";
-import { registeredProducts, launchProductWebpage } from "../explore/page";
-import { mockDocDatabase } from "../ai/page";
+import { mockDocDatabase } from "../ai/doc-database";
 
 interface PaletteItem {
   id: string;

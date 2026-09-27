@@ -17,8 +17,6 @@ import { Button } from "@aroh/ads";
 import { motion } from "framer-motion";
 import ArohLogo from "../components/aroh-logo";
 
-// Re-export for any external consumers
-export { type ProductDetails, registeredProducts, launchProductWebpage };
 
 export default function ExplorePage() {
   const router = useRouter();

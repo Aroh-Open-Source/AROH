@@ -1,8 +1,8 @@
 # UNIVERSAL VERSION CONTROLLER & MODULAR ARCHITECTURE GOVERNANCE — AROH OPEN SOURCE
 
-> **Authoritative Workspace Rule**: This repository operates strictly under the **Universal Version Controller + Change Governance System**, the **Universal Modular Architecture & Change-Isolation Governance System** ([`ARCHITECTURE.md`](file:///d:/PROJECT/AROH%20Open%20Source/ARCHITECTURE.md)), the **Three Realities Reconciliation Model**, and **Product Intent Recovery**.
+> **Authoritative Workspace Rule**: This repository operates strictly under the **Universal Version Controller + Change Governance System**, the **Universal Modular Architecture & Change-Isolation Governance System** ([`PRODUCT_MASTER.md`](file:///d:/PROJECT/AROH%20Open%20Source/PRODUCT_MASTER.md)), the **Three Realities Reconciliation Model**, and **Product Intent Recovery**.
 > 
-> **Absolute Invariant**: *THE AGENT MUST VISIT THE AUTHORITATIVE VERSION CONTROLLER (VERSION_CONTROLLER.md) AND ARCHITECTURE SPECIFICATION (ARCHITECTURE.md) BEFORE EXECUTION TO UNDERSTAND RELEVANT PREVIOUS CHANGES, OWNERSHIP BOUNDARIES, AND MINIMUM SAFE CHANGE RADIUS, AND MUST UPDATE BOTH UPON VERIFIED COMPLETION.*
+> **Absolute Invariant**: *THE AGENT MUST VISIT THE AUTHORITATIVE VERSION CONTROLLER (VERSION_CONTROLLER.md) AND PRODUCT MASTER (PRODUCT_MASTER.md) BEFORE EXECUTION TO UNDERSTAND RELEVANT PREVIOUS CHANGES, OWNERSHIP BOUNDARIES, AND MINIMUM SAFE CHANGE RADIUS, AND MUST UPDATE BOTH UPON VERIFIED COMPLETION.*
 
 ---
 
@@ -53,7 +53,7 @@ Where:
 ┌───────────────────────────────────────────────┐
 │ 1. READ VERSION CONTROLLER                    │
 ├───────────────────────────────────────────────┤
-│ 2. READ ARCHITECTURE (ARCHITECTURE.md)        │
+│ 2. READ PRODUCT MASTER (PRODUCT_MASTER.md)    │
 ├───────────────────────────────────────────────┤
 │ 3. SEARCH PROJECT & LOCATE EXISTING CODE      │
 ├───────────────────────────────────────────────┤
@@ -75,7 +75,7 @@ Where:
 ├───────────────────────────────────────────────┤
 │ 11. COMMIT IF AUTHORIZED                      │
 ├───────────────────────────────────────────────┤
-│ 12. UPDATE VERSION CONTROLLER & ARCHITECTURE  │
+│ 12. UPDATE VERSION CONTROLLER & PRODUCT MASTER│
 ├───────────────────────────────────────────────┤
 │ 13. FINAL CONSISTENCY CHECK                   │
 ├───────────────────────────────────────────────┤

@@ -223,6 +223,9 @@ export default function DashboardPage() {
             <Button variant="primary" onClick={() => router.push("/products")} className="px-5 text-xs bg-slate-900 text-white hover:bg-slate-800">
               Console Hub
             </Button>
+            <Button variant="secondary" onClick={() => router.push("/dashboard/organization")} className="px-5 text-xs bg-white text-slate-800 border-black/10 hover:bg-slate-50">
+              Organization
+            </Button>
             <Button variant="secondary" onClick={() => router.push("/")} className="px-5 text-xs bg-white text-slate-800 border-black/10 hover:bg-slate-50">
               Back to Home
             </Button>

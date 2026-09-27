@@ -30,6 +30,8 @@ import { emitTelemetryEvent } from "../telemetry/index";
  * - Automated reconciliation, fraud velocity limits, and complete audit trail.
  */
 
+export const NO_MINOR_PAYMENT_FOR_AROS = true;
+
 export class PurchaseSafetyService {
   private eligibilities = new Map<string, UserPurchaseEligibility>();
   private consents = new Map<string, PurchaseConsentRecord>();

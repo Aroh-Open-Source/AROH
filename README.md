@@ -4,6 +4,14 @@
 
 ---
 
+## 📖 Authoritative Documentation
+
+The repository is governed by two authoritative Markdown master documents:
+- **Product & Architecture Master**: 👉 **[`PRODUCT_MASTER.md`](file:///d:/PROJECT/AROH%20Open%20Source/PRODUCT_MASTER.md)** (System architecture, 10 domain boundaries, change-isolation governance, DPDP compliance, and enterprise engine).
+- **Version Controller & History Ledger**: 👉 **[`VERSION_CONTROLLER.md`](file:///d:/PROJECT/AROH%20Open%20Source/VERSION_CONTROLLER.md)** (Authoritative `A.BC.DE.F` version ledger, complete release timeline, commits, and governance rules).
+
+---
+
 ## 🏛️ Ecosystem Architecture
 
 ```text

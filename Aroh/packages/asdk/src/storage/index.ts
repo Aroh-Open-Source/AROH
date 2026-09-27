@@ -54,7 +54,12 @@ export class BrowserLocalStorage implements IPlatformStorage {
 
   public isAvailable(): boolean {
     try {
-      return typeof window !== "undefined" && typeof window.localStorage !== "undefined" && window.localStorage !== null;
+      return (
+        typeof window !== "undefined" &&
+        typeof window.document !== "undefined" &&
+        typeof window.localStorage !== "undefined" &&
+        window.localStorage !== null
+      );
     } catch {
       return false;
     }
