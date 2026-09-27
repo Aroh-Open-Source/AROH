@@ -15,7 +15,7 @@ export interface PlatformVersionInfo {
   commit: string;
 }
 
-export const PLATFORM_VERSION = "3.00.00.0";
+export const PLATFORM_VERSION = "2.05.00.0";
 export const PLATFORM_STATUS = "VERIFIED";
 export const PLATFORM_RELEASE_NAME = "Federated Multi-Tenant Enterprise Engine & Universal File Consolidation";
 export const PLATFORM_BUILD_DATE = "2026-09-27";
@@ -23,8 +23,8 @@ export const PLATFORM_COMMIT = "HEAD";
 
 export const PLATFORM_VERSION_INFO: PlatformVersionInfo = {
   version: PLATFORM_VERSION,
-  major: 3,
-  subVersion: 0,
+  major: 2,
+  subVersion: 5,
   functional: 0,
   patch: 0,
   status: PLATFORM_STATUS,

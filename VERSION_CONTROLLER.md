@@ -2,7 +2,7 @@
 
 > **Authoritative Historical & Governance Master**: This document is the single source of truth for version history, change tracking, git commits, migration records, and release governance across the **AROH Open Source Platform**.
 > 
-> **Current Platform Version**: `3.00.00.0`  
+> **Current Platform Version**: `2.05.00.0`  
 > **Authoritative Version Format**: `A.BC.DE.F`  
 > **Current Status**: `VERIFIED`  
 > **Associated Product Master**: [`PRODUCT_MASTER.md`](file:///d:/PROJECT/AROH%20Open%20Source/PRODUCT_MASTER.md)
@@ -22,10 +22,15 @@ Where:
 * `F` = **Minor Fix / Bug / Patch** (0–9) — Bug fixes, styling, small validation, or documentation corrections.
 
 ### Reset Hierarchy
-* Major Change: `A+1.00.00.0`
+* Major Change: `A+1.00.00.0` (REQUIRES EXPLICIT USER CONSENT)
 * Sub-Version Change: `A.BC+1.00.0`
 * Functional Change: `A.BC.DE+1.0`
 * Minor / Patch Change: `A.BC.DE.F+1`
+
+### Version Authority Delegation
+* **`A` (Major Version)**: **RESTRICTED — User Consent Required**. The agent MUST NEVER create or increment a new major version (`A+1.xx.xx.x`) without the user's prior, explicit consent.
+* **`BC` (Sub-Version / Release Line)**: **Partial Authority** (used for meaningful release stages or phase milestones).
+* **`DE` (Functional Change) & `F` (Patch / Bug Fix)**: **Full Agent Authority** to increment, manage, and verify.
 
 ---
 
@@ -33,7 +38,7 @@ Where:
 
 | Version | Previous | Level | Commit | Date | Summary of Release |
 |---|---|---|---|---|---|
-| **`3.00.00.0`** | `2.04.00.0` | `MAJOR` | `HEAD` | 2026-09-27 | **Phase 5 Federated Multi-Tenant Enterprise Engine**: Team Wallets, member monthly spending quotas, role-based debit authorizations, SAML 2.0 & SCIM 2.0 Directory Federation, and Organization Web Dashboard. Universal project file consolidation under two-master governance rule (`PRODUCT_MASTER.md` & `VERSION_CONTROLLER.md`). |
+| **`2.05.00.0`** | `2.04.00.0` | `SUB-VERSION` | `HEAD` | 2026-09-27 | **Phase 5 Federated Multi-Tenant Enterprise Engine**: Team Wallets, member monthly spending quotas, role-based debit authorizations, SAML 2.0 & SCIM 2.0 Directory Federation, and Organization Web Dashboard. Universal project file consolidation under two-master governance rule (`PRODUCT_MASTER.md` & `VERSION_CONTROLLER.md`). |
 | **`2.04.00.0`** | `2.03.08.0` | `SUB-VERSION` | `HEAD` | 2026-09-21 | **Phase 4 Mobile Expansion**: Unified Cross-Platform Shell (`@aroh/mobile`), universal storage abstraction (`IPlatformStorage`), deterministic `aroh://` deep linking, and mobile security attestation. |
 | **`2.03.08.0`** | `2.03.07.0` | `FUNCTIONAL` | `db8cebd` | 2026-09-20 | **Universal Modular Architecture & Change-Isolation Governance System**: Established 76-rule system of boundaries, domain/feature ownership, locality, and change isolation. |
 | **`2.03.07.0`** | `2.03.06.0` | `FUNCTIONAL` | `d37e3e2` | 2026-09-20 | **Ecosystem Polish & Developer API Explorer**: Cryptographic Transaction Receipts (SHA-256), formal Grievance/Dispute Redressal interface, and interactive Developer API Explorer in Developer Tools. |
@@ -59,9 +64,9 @@ Where:
 
 ## 3. Comprehensive Version Release Entries
 
-### 3.00.00.0
+### 2.05.00.0
 - **Date**: 2026-09-27
-- **Change Level**: `MAJOR` (`A=3`, `BC=00`, `DE=00`, `F=0`)
+- **Change Level**: `SUB-VERSION` (`BC=05`, `DE=00`, `F=0`)
 - **Previous Version**: `2.04.00.0`
 - **Scope & Features**:
   1. **Phase 5 Multi-Tenant Enterprise Engine**:

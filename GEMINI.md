@@ -40,10 +40,15 @@ Where:
 * `F` = Minor Fix / Bug / Error (0–9) — Bug fixes, styling, small validation, or documentation corrections.
 
 ### Reset Hierarchy:
-* Major Change: `A+1.00.00.0`
+* Major Change: `A+1.00.00.0` (REQUIRES EXPLICIT USER CONSENT)
 * Sub-Version Change: `A.BC+1.00.0`
 * Functional Change: `A.BC.DE+1.0`
 * Minor/Patch Change: `A.BC.DE.F+1`
+
+### Version Authority Delegation:
+* **`A` (Major Version)**: **RESTRICTED — User Consent Required**. The agent MUST NEVER create or increment a new major version (`A+1.xx.xx.x`) without the user's prior, explicit consent.
+* **`BC` (Sub-Version / Release Line)**: **Partial Authority** (used for meaningful release stages or phase milestones).
+* **`DE` (Functional Change) & `F` (Patch / Bug Fix)**: **Full Agent Authority** to increment, manage, and verify.
 
 ---
 

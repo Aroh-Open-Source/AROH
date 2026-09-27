@@ -2,8 +2,8 @@
 
 > **Authoritative Product & Architecture Master**: This document is the single, permanent source of truth for product purpose, architecture, modular domain boundaries, change-isolation rules, experience principles, data flow, security/privacy, and technical capabilities across the **AROH Open Source Platform & Application Ecosystem**.
 >
-> **Platform Version**: `3.00.00.0`  
-> **Authoritative Version Format**: `A.BC.DE.F` (Major: 3, Sub-version: 00, Functional: 00, Patch: 0)  
+> **Platform Version**: `2.05.00.0`  
+> **Authoritative Version Format**: `A.BC.DE.F` (Major: 2, Sub-version: 05, Functional: 00, Patch: 0)  
 > **Status**: `VERIFIED`  
 > **Canonical Repository**: [https://github.com/Aroh-Open-Source/AROH](https://github.com/Aroh-Open-Source/AROH) (`main`)  
 > **Personal / Mirror Remote**: [https://github.com/UdayPatnala/Aroh](https://github.com/UdayPatnala/Aroh) (`personal/main`)  
@@ -291,6 +291,11 @@ Every change to the platform follows the **Universal Master Execution Pipeline**
 9. Update version metadata in code & system exports.
 10. Update `VERSION_CONTROLLER.md` and `PRODUCT_MASTER.md`.
 11. Report completion using structured format.
+
+### Version Authority Delegation
+- **`A` (Major Version)**: **RESTRICTED — User Consent Required**. The agent MUST NEVER create or increment a new major version (`A+1.xx.xx.x`) without the user's prior, explicit consent.
+- **`BC` (Sub-Version / Release Line)**: **Partial Authority** (used for meaningful release stages or phase milestones).
+- **`DE` (Functional Change) & `F` (Patch / Bug Fix)**: **Full Agent Authority** to increment, manage, and verify.
 
 ---
 
