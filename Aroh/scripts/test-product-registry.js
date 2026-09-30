@@ -60,7 +60,7 @@ try {
       }
     } else {
       assert(
-        product.status === "development" || product.status === "offline",
+        product.status === "development" || product.status === "offline" || product.status === "coming-soon",
         `Product without liveUrl is accurately designated as '${product.status}' (no fabricated URLs)`
       );
     }

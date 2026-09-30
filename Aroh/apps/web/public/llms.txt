@@ -37,10 +37,10 @@ All products are verified from canonical source repositories and live deployment
   - Live: https://0mnistream.vercel.app/
   - Repo: https://github.com/UdayPatnala/OmniStream
 
-- **SpeDex** (`/explore/spedex`): Intelligent courier delivery and logistics platform featuring real-time package tracking, multi-stop route optimization, and driver telemetry.
+- **SpeDex** (`/explore/spedex`): Enterprise smart wallet and financial intelligence platform featuring high-frequency transaction tracking, automated trip ledgers, UPI vendor quick-pays, and spending velocity analytics.
   - Version: v2.1.0
-  - Live: https://spedex.vercel.app/
-  - Repo: https://github.com/UdayPatnala/SpeDex
+  - Status: Future Launch / In Development
+  - Repo: https://github.com/UdayPatnala/Spedex
 
 - **Nebula** (`/explore/nebula`): Planetary intelligence dashboard delivering live telemetry from Earth and space (ISS orbital tracking, seismic events, orbital rocket countdowns, NASA imagery).
   - Version: v1.4.2

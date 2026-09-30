@@ -5,6 +5,7 @@ export * from "./store/index";
 export * from "./sync/index";
 export * from "./ai/provider";
 export * from "./registry/products";
+export * from "./registry/showcase-priority";
 export * from "./adapters/index";
 export * from "./privacy/index";
 export * from "./services/api-key";

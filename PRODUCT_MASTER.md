@@ -2,8 +2,8 @@
 
 > **Authoritative Product & Architecture Master**: This document is the single, permanent source of truth for product purpose, architecture, modular domain boundaries, change-isolation rules, experience principles, data flow, security/privacy, and technical capabilities across the **AROH Open Source Platform & Application Ecosystem**.
 >
-> **Platform Version**: `2.05.00.0`  
-> **Authoritative Version Format**: `A.BC.DE.F` (Major: 2, Sub-version: 05, Functional: 00, Patch: 0)  
+> **Platform Version**: `2.05.01.0`  
+> **Authoritative Version Format**: `A.BC.DE.F` (Major: 2, Sub-version: 05, Functional: 01, Patch: 0)  
 > **Status**: `VERIFIED`  
 > **Canonical Repository**: [https://github.com/Aroh-Open-Source/AROH](https://github.com/Aroh-Open-Source/AROH) (`main`)  
 > **Personal / Mirror Remote**: [https://github.com/UdayPatnala/Aroh](https://github.com/UdayPatnala/Aroh) (`personal/main`)  
@@ -103,7 +103,7 @@ d:\PROJECT\AROH Open Source
 │   ├── Domain 2: Financial Economy & Aros Ledger (@aroh/asdk/services/wallet.ts, purchase-safety.ts)
 │   ├── Domain 3: Developer Platform & API Vault (@aroh/asdk/services/api-key.ts, webhook.ts)
 │   ├── Domain 4: AI Orchestration (@aroh/asdk/services/ai.ts)
-│   ├── Domain 5: Product Showcase & Registry (@aroh/asdk/src/registry/products.ts)
+│   ├── Domain 5: Product Showcase & Hierarchy (@aroh/asdk/src/registry/products.ts, showcase-priority.ts)
 │   ├── Domain 6: Observability, Tracing & Telemetry (@aroh/asdk/src/tracing, src/telemetry)
 │   ├── Domain 7: DPDP Privacy, Consent & Statutory Rights (@aroh/asdk/services/privacy.ts)
 │   ├── Domain 8: Design System (@aroh/ads)
@@ -124,7 +124,7 @@ d:\PROJECT\AROH Open Source
 │   └── Aroh/manifests/ (Spoke synchronization manifests)
 │
 └── TESTING (Proximity-Driven Verification Suites)
-    ├── Aroh/packages/asdk/tests/ (15 Vitest suites, 153 assertions)
+    ├── Aroh/packages/asdk/tests/ (16 Vitest suites, 181 assertions)
     ├── Aroh/packages/ads/tests/ (Design system suite, 7 assertions)
     ├── Aroh/apps/mobile/tests/ (Mobile navigation suite, 5 assertions)
     └── Aroh/scripts/ (Sync CLI, Privacy static audit, SEO audit, Session sync)
@@ -215,6 +215,18 @@ Spoke integration uses a **zero-coupling adapter architecture**:
 4. **Three-Way Semantic Reconciler ($B \oplus P \oplus A$)**:
    - Synchronizes manifests across Baseline ($B$), Product Spoke ($P$), and Platform Adapter ($A$).
    - CLI engine (`aroh-sync.js`) supports `status`, `inspect`, `detect`, `diff`, `plan`, and `apply` with dry-run protection and deterministic exit codes (0 to 7).
+
+### 9.1 Product Showcase Hierarchy & SpeDex Future-Launch Architecture
+- **Single Canonical Source**: `@aroh/asdk/src/registry/showcase-priority.ts` (`resolveShowcaseHierarchy()`).
+- **Current Platform Reality (Pre-Release)**:
+  1. `OmniStream` — STAR / PRIMARY FLAGSHIP: Leading live product, receives prominent hero card and leading CTA.
+  2. `JavaPath Pro` — SECONDARY FEATURED: Follows OmniStream with full capability presentation.
+  3. `Music Mirror` — TERTIARY FEATURED: Positioned after JavaPath Pro.
+  4. `SpeDex` — FUTURE LAUNCH / COMING SOON: Visibly separated with dedicated "Future Launch" badge, roadmap milestones, and notification signup. Strictly 0 purchase/install/download buttons.
+- **Post-Release Promotion Transition**:
+  - Controlled by verified canonical state via `isSpedexReleased()`: Requires status `online` and verified HTTPS `liveUrl`.
+  - Upon release, hierarchy automatically promotes to: `SpeDex` (STAR) → `OmniStream` (FEATURED) → `JavaPath Pro` (FEATURED) → `Music Mirror` (FEATURED) without requiring component redesigns.
+  - Zero hard-coded conflicting product orders in UI components.
 
 ---
 

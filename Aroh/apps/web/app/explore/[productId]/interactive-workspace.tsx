@@ -815,133 +815,114 @@ export function useArohJavaPathBridge() {
 }
 
 /* ==========================================
-   9. SpeDex Workspace Component
+   9. SpeDex Workspace Component — Future Launch Preview
    ========================================== */
-function SpedexWorkspace({ user, wallet, rewardUser }: any) {
-  const [cost, setCost] = React.useState("50");
-  const [desc, setDesc] = React.useState("Cloud Computing Resource Usage");
-  const [processing, setProcessing] = React.useState(false);
-  const [showCode, setShowCode] = React.useState(false);
+function SpedexWorkspace({ user }: any) {
+  const [notified, setNotified] = React.useState(false);
 
-  const handleCharge = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!user || !wallet) return;
-    const value = parseFloat(cost);
-    if (isNaN(value) || value <= 0) return;
-
-    if (wallet.balance < value) {
-      alert("Insufficient wallet balance to cover budget debit!");
-      return;
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      setNotified(localStorage.getItem("aroh_notify_spedex") === "true");
     }
+  }, []);
 
-    setProcessing(true);
-    try {
-      await rewardUser(user.id, -value, `SpeDex Payment: "${desc}"`);
-      alert(`Success! Processed SpeDex debit of -${value} Aros.`);
-      setCost("50");
-      setDesc("Cloud Resource Usage");
-    } catch (err: any) {
-      alert(err.message || "Failed to process SpeDex debit");
-    } finally {
-      setProcessing(false);
+  const handleNotify = () => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("aroh_notify_spedex", "true");
+      setNotified(true);
     }
+  };
+
+  const phases = [
+    { phase: "Architecture",  state: "Complete",    desc: "Core data models, REST API contracts, IDOR security." },
+    { phase: "Backend",       state: "In Progress", desc: "Spring Boot REST API, JPA persistence, UPI vendor registry." },
+    { phase: "Frontend",      state: "In Progress", desc: "React + Vite dashboard, trip ledger, velocity analytics." },
+    { phase: "Mobile",        state: "Planned",     desc: "Kotlin Jetpack Compose mobile app with real-time sync." },
+    { phase: "Launch",        state: "Future",      desc: "Public deployment pending security review and beta." }
+  ];
+
+  const stateColor: Record<string, string> = {
+    "Complete":    "text-emerald-400",
+    "In Progress": "text-amber-400",
+    "Planned":     "text-zinc-400",
+    "Future":      "text-zinc-600"
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white/3 border border-white/5 p-6 rounded-2xl">
-      <div className="space-y-4 col-span-1">
+    <div className="space-y-6 bg-white/3 border border-white/5 p-6 rounded-2xl">
+      {/* Banner */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h3 className="text-lg font-bold text-white">Spend Speedometer & Payment Bridge</h3>
-          <p className="text-xs text-zinc-400">Debit Aros tokens from your wallet to pay for microservices.</p>
-        </div>
-
-        <form onSubmit={handleCharge} className="space-y-4">
-          <div>
-            <label htmlFor="spedexCost" className="block text-[10px] uppercase font-bold text-zinc-400 mb-1.5">Charge Amount (Aros)</label>
-            <input
-              id="spedexCost"
-              type="number"
-              value={cost}
-              onChange={(e) => setCost(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-zinc-950 border border-white/10 text-white text-xs focus:outline-none focus:border-amber-500"
-              required
-            />
+          <div className="flex items-center gap-2 mb-2">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-500/15 text-amber-400 border border-amber-500/20">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+              FUTURE LAUNCH · IN DEVELOPMENT
+            </span>
           </div>
-
-          <div>
-            <label htmlFor="spedexDesc" className="block text-[10px] uppercase font-bold text-zinc-400 mb-1.5">Debit Memo</label>
-            <input
-              id="spedexDesc"
-              type="text"
-              value={desc}
-              onChange={(e) => setDesc(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-zinc-950 border border-white/10 text-white text-xs focus:outline-none focus:border-amber-500"
-              required
-            />
-          </div>
-
-          <Button type="submit" variant="primary" className="w-full py-2 text-xs" disabled={processing}>
-            {processing ? "Processing debit..." : "Execute SpeDex Debit"}
-          </Button>
-        </form>
-      </div>
-
-      <div className="bg-black/40 rounded-xl border border-white/5 p-5 flex flex-col justify-center items-center h-60 space-y-4 col-span-1">
-        <span className="text-[10px] uppercase tracking-wider text-zinc-400 font-bold block">Current Spending Speed</span>
-        
-        {/* Speedometer visual SVG */}
-        <div className="relative w-36 h-20">
-          <svg className="w-full h-full" viewBox="0 0 100 50">
-            <path
-              d="M 10 50 A 40 40 0 0 1 90 50"
-              fill="none"
-              stroke="#27272a"
-              strokeWidth="10"
-              strokeLinecap="round"
-            />
-            <path
-              d="M 10 50 A 40 40 0 0 1 70 20"
-              fill="none"
-              stroke="#f59e0b"
-              strokeWidth="10"
-              strokeLinecap="round"
-            />
-          </svg>
-          <span className="absolute bottom-0 inset-x-0 text-center text-sm font-bold text-white font-mono">75% Velocity</span>
+          <h3 className="text-lg font-bold text-white">SpeDex — Enterprise Smart Wallet</h3>
+          <p className="text-xs text-zinc-400 mt-1 max-w-md">
+            High-frequency expense tracking, automated trip ledgers, UPI vendor quick-pays, and spending velocity analytics. Not yet publicly launched.
+          </p>
         </div>
-        
-        <span className="text-zinc-500 text-[10px] text-center max-w-[200px] leading-relaxed">
-          Aggregates transactions and triggers alerts when speed exceeds budget limits.
-        </span>
-      </div>
-
-      <div className="md:col-span-2 border-t border-white/5 pt-4 mt-2">
         <button
-          onClick={() => setShowCode(!showCode)}
-          className="text-xs text-amber-400 font-semibold tracking-wide hover:underline cursor-pointer flex items-center gap-1 focus:outline-none"
+          type="button"
+          onClick={handleNotify}
+          disabled={notified}
+          className={`shrink-0 px-4 py-2 rounded-xl font-bold text-xs transition-colors border cursor-pointer ${
+            notified
+              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20 cursor-default"
+              : "bg-amber-500 text-white hover:bg-amber-400 border-amber-500"
+          }`}
         >
-          {showCode ? "▼ Hide ASDK SSO & Integration Code" : "▶ Show ASDK SSO & Integration Code"}
+          {notified ? "✓ You'll be notified" : "Notify Me on Launch"}
         </button>
-        {showCode && (
-          <div className="bg-black/60 rounded-xl p-4 border border-white/5 overflow-x-auto text-[10px] font-mono text-zinc-400 leading-relaxed mt-3 max-h-60 overflow-y-auto scrollbar-thin">
-            <pre>{`// D:\\PROJECT\\Spedex\\dashboard_app\\src\\aroh-adapter.ts
-import { usePlatformStore } from "@aroh/asdk";
+      </div>
 
-export function useArohSpedexBridge() {
-  const { user, profile, wallet, token, isAuthenticated, logout, rewardUser } = usePlatformStore();
+      {/* Development Roadmap */}
+      <div className="border-t border-white/5 pt-5">
+        <h4 className="text-xs uppercase tracking-wider text-zinc-400 font-bold mb-4">Development Roadmap</h4>
+        <div className="space-y-3">
+          {phases.map((item, i) => (
+            <div key={i} className="flex items-center gap-4">
+              <div className={`w-2 h-2 rounded-full shrink-0 ${
+                item.state === "Complete"    ? "bg-emerald-500" :
+                item.state === "In Progress" ? "bg-amber-500 animate-pulse" :
+                "bg-zinc-700"
+              }`} />
+              <div className="flex-1 flex items-center justify-between gap-3">
+                <div>
+                  <span className="text-xs font-semibold text-white">{item.phase}</span>
+                  <p className="text-[11px] text-zinc-500 leading-snug mt-0.5">{item.desc}</p>
+                </div>
+                <span className={`text-[10px] font-bold shrink-0 ${stateColor[item.state]}`}>{item.state}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
 
-  const executePayment = async (amount: number, description: string) => {
-    if (!user) throw new Error("Authentication Required");
-    if (!wallet || wallet.balance < amount) {
-      throw new Error("Insufficient Aros Balance");
-    }
-    await rewardUser(user.id, -amount, \`Spedex Debit: \${description}\`);
-  };
+      {/* Architecture preview */}
+      <div className="border-t border-white/5 pt-5">
+        <h4 className="text-xs uppercase tracking-wider text-zinc-400 font-bold mb-3">Technology Stack</h4>
+        <div className="flex flex-wrap gap-2">
+          {["Java 17 / Spring Boot", "React + Vite + TypeScript", "Expo React Native", "Kotlin Jetpack Compose", "JPA / H2 / PostgreSQL", "IDOR Security Architecture"].map((t) => (
+            <span key={t} className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-white/10 text-zinc-300 text-[10px] font-mono">
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
 
-  return { user, token, isAuthenticated, executePayment, logout };
-}`}</pre>
-          </div>
-        )}
+      {/* Source link */}
+      <div className="border-t border-white/5 pt-4 text-center">
+        <a
+          href="https://github.com/UdayPatnala/Spedex"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-xs text-zinc-400 hover:text-white transition-colors"
+        >
+          View source repository on GitHub ↗
+        </a>
       </div>
     </div>
   );

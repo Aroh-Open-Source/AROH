@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { usePlatformStore, formatArosBalance } from "@aroh/asdk";
+import { usePlatformStore, formatArosBalance, resolveShowcaseHierarchy, type ProductShowcase } from "@aroh/asdk";
 import { Button } from "@aroh/ads";
 import { motion, AnimatePresence } from "framer-motion";
 import NotificationCenter from "./components/notification-center";
@@ -222,6 +222,129 @@ export default function HomePage() {
               </Button>
             </div>
           </motion.div>
+
+          {/* ── Featured Products Showcase ── */}
+          {(() => {
+            const hierarchy = resolveShowcaseHierarchy();
+            const { starProduct, featuredProducts, futureLaunchProducts } = hierarchy;
+            const showcaseProducts: Array<{ product: ProductShowcase; isStar: boolean; isFuture: boolean }> = [
+              { product: starProduct, isStar: true, isFuture: false },
+              ...featuredProducts.slice(0, 2).map((p) => ({ product: p, isStar: false, isFuture: false })),
+              ...futureLaunchProducts.slice(0, 1).map((p) => ({ product: p, isStar: false, isFuture: true }))
+            ];
+
+            return (
+              <div className="space-y-5 pt-10 border-t border-black/5">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h2 className="text-base font-bold tracking-tight text-slate-900">Ecosystem Products</h2>
+                    <p className="text-xs text-slate-500 mt-0.5">Products you can discover, explore, and use right now.</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => router.push("/explore")}
+                    className="text-xs font-semibold text-sky-600 hover:text-sky-800 transition-colors cursor-pointer"
+                  >
+                    View all products →
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 gap-4">
+                  {/* Star product — full-width dark card */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4 }}
+                    onClick={() => router.push(`/explore/${starProduct.productId}`)}
+                    className="relative overflow-hidden bg-slate-900 text-white rounded-2xl p-6 cursor-pointer group hover:ring-2 hover:ring-sky-500/30 transition-all shadow-lg"
+                  >
+                    <div className="pointer-events-none absolute -top-12 -right-12 w-48 h-48 rounded-full bg-sky-500/10 blur-3xl" />
+                    <div className="relative z-10 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold bg-sky-500/20 text-sky-300 border border-sky-500/30">
+                            <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
+                            CURRENT FLAGSHIP
+                          </span>
+                          <span className="text-[10px] font-mono text-slate-500">{starProduct.version}</span>
+                        </div>
+                        <h3 className="text-xl font-extrabold text-white tracking-tight">{starProduct.name}</h3>
+                        <p className="text-slate-400 text-xs leading-relaxed max-w-sm">{starProduct.shortDescription}</p>
+                        <div className="flex flex-wrap gap-1.5 pt-1">
+                          {starProduct.primaryCapabilities.slice(0, 3).map((cap, i) => (
+                            <span key={i} className="px-2 py-0.5 rounded text-[9px] bg-white/5 border border-white/10 text-slate-300 font-mono">
+                              {cap.title}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="shrink-0 flex flex-col items-end gap-2">
+                        {starProduct.liveUrl && (
+                          <a
+                            href={starProduct.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="px-5 py-2 rounded-xl bg-white text-slate-900 font-bold text-xs hover:bg-sky-50 transition-colors shadow-sm"
+                          >
+                            Launch App ↗
+                          </a>
+                        )}
+                        <span className="text-xs text-slate-500 group-hover:text-slate-300 transition-colors">
+                          Full details →
+                        </span>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Featured & Future-Launch — 2-col grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    {[...featuredProducts.slice(0, 2), ...futureLaunchProducts.slice(0, 1)].map((prod, i) => {
+                      const isFuture = prod.status === "coming-soon";
+                      return (
+                        <motion.div
+                          key={prod.productId}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.35, delay: 0.1 + i * 0.07 }}
+                          onClick={() => router.push(`/explore/${prod.productId}`)}
+                          className={`rounded-2xl p-5 cursor-pointer border transition-all hover:shadow-md group ${
+                            isFuture
+                              ? "bg-gradient-to-br from-amber-50 to-orange-50/40 border-amber-200/60 hover:border-amber-300"
+                              : "bg-white border-black/5 hover:border-slate-300"
+                          }`}
+                        >
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-1.5">
+                              {isFuture ? (
+                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
+                                  <span className="w-1 h-1 rounded-full bg-amber-500" /> FUTURE LAUNCH
+                                </span>
+                              ) : (
+                                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                  <span className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" /> LIVE
+                                </span>
+                              )}
+                            </div>
+                            <h3 className={`text-sm font-bold ${isFuture ? "text-slate-800" : "text-slate-900 group-hover:text-sky-700"} transition-colors`}>
+                              {prod.name}
+                            </h3>
+                            <p className="text-slate-500 text-[11px] leading-relaxed line-clamp-2">{prod.shortDescription}</p>
+                          </div>
+                          <div className="mt-4 pt-3 border-t border-black/5 flex justify-between items-center">
+                            <span className="text-slate-400 font-mono text-[10px]">{prod.version}</span>
+                            <span className={`text-[10px] font-bold ${isFuture ? "text-amber-600" : "text-sky-600"}`}>
+                              {isFuture ? "Learn more →" : "Details →"}
+                            </span>
+                          </div>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
 
           {/* Live Ecosystem Announcements Stream */}
           <div className="space-y-6 border-t border-black/5 pt-12">

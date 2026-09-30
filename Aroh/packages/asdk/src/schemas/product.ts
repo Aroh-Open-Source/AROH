@@ -4,9 +4,9 @@ export const MembershipTierSchema = z.enum(["basic", "pro", "enterprise"]);
 export type MembershipTier = z.infer<typeof MembershipTierSchema>;
 
 export const ProductStatusSchema = z.enum([
-
   "online",
   "development",
+  "coming-soon",
   "offline",
   "internal"
 ]);

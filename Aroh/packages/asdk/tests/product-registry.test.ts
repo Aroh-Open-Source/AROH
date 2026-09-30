@@ -47,7 +47,7 @@ describe("Canonical Product Showcase Registry", () => {
 
   it("truthfully marks offline or in-development products without guessing URLs", () => {
     const spedex = getProductById("spedex");
-    expect(spedex?.status).toBe("development");
+    expect(spedex?.status).toBe("coming-soon");
     expect(spedex?.liveUrl).toBeUndefined();
     expect(spedex?.githubUrl).toBe("https://github.com/UdayPatnala/Spedex");
 

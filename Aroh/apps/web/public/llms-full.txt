@@ -34,10 +34,10 @@ The platform SDK maintains a strictly validated registry of connected products (
 | Product ID | Display Name | Category | Version | Primary Capabilities | Live URL | Repository |
 |---|---|---|---|---|---|---|
 | `omnistream` | OmniStream | Media & Streaming | v1.8.5 | U-Tube Discovery, CineMorph Theater, OMS Client CV/DSP Engine | https://0mnistream.vercel.app/ | https://github.com/UdayPatnala/OmniStream |
-| `spedex` | SpeDex | Courier & Logistics | v2.1.0 | Real-time tracking, Route optimization, Telemetry | https://spedex.vercel.app/ | https://github.com/UdayPatnala/SpeDex |
+| `spedex` | SpeDex | Fintech & Analytics | v2.1.0 | Automated Trip Ledgers, UPI Quick-Pay, Velocity Analytics | In Development (Future Launch) | https://github.com/UdayPatnala/Spedex |
 | `nebula` | Nebula | Space & Telemetry | v1.4.2 | Live ISS tracking, Seismic events, Rocket launches, NASA APOD | https://nebula-tau-nine.vercel.app/ | https://github.com/UdayPatnala/nebula |
-| `music-mirror` | Music Mirror | Audio & Music | v1.2.0 | Spotify playback sync, Audio visualizer, Lyric tracking | https://music-mirror.vercel.app/ | https://github.com/UdayPatnala/Music-Mirror |
-| `javapath-pro` | JavaPath Pro | Developer Education | v1.1.0 | Interactive JVM playgrounds, Coding challenges, Certification | https://javapath-pro.vercel.app/ | https://github.com/UdayPatnala/javapath-pro |
+| `music-mirror` | Music Mirror | AI & Audio | v1.2.0 | Edge emotion detection, Adaptive mood curation, Audio orchestration | https://music-mirror-aos.vercel.app/ | https://github.com/UdayPatnala/Music-Mirror |
+| `javapath-pro` | JavaPath Pro | Developer Platform | v1.1.0 | In-browser IDE, Static compiler diagnostics, Sandboxed Java 17 | https://javapath-pro-aos.vercel.app/ | https://github.com/UdayPatnala/Java-Path |
 | `aros-wallet` | Aros Wallet | Platform Utility | v1.0.0 | Digital credit ledger, Transaction math, Membership tiers | https://aroh-os.vercel.app/explore/aros-wallet | Internal AROH Core |
 | `aroh-cms` | AROH CMS | Platform Utility | v1.0.0 | Scheduled announcements, Alert feeds, Markdown CMS | https://aroh-os.vercel.app/explore/aroh-cms | Internal AROH Core |
 | `aros-metrics` | Aros Metrics | Platform Utility | v1.0.0 | Telemetry graphs, Ledger velocity, Active session monitoring | https://aroh-os.vercel.app/explore/aros-metrics | Internal AROH Core |
